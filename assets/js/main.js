@@ -1138,21 +1138,21 @@ function renderProductsFromData(products) {
         const allImages = product.images.join(',');
 
         html += `
-            <div class="product-card" data-index="${index}" data-category="${product.category}" data-weight="${product.weight}" data-material="${product.material}">
+            <div class="product-card" data-index="${index}" data-category="${product.category}" data-weight="${product.weight}" data-material="${product.material}" onclick="window.location.href='product-detail.html?id=${product.id}'" style="cursor: pointer;">
                 <div class="img-wrapper">
                     <img src="${mainImg}" 
+                         loading="lazy"
                          onmouseover="this.src='${hoverImg}'" 
                          onmouseout="this.src='${mainImg}'" 
-                         onclick="window.location.href='product-detail.html?id=${product.id}'"
-                         style="cursor:pointer"
                          alt="${product.name}" class="product-img">
-                    <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                    <button class="wishlist-btn" onclick="event.stopPropagation();"><i class="far fa-heart"></i></button>
                 </div>
                 <div class="details">
                     <h4>${product.name}</h4>
                     <span class="weight-badge">Net Wt: ${product.weight}g</span>
                     <span class="price">Approx ₹ ${price.toLocaleString()}</span>
                     <button class="add-to-cart btn-gold" 
+                        onclick="event.stopPropagation();"
                         data-id="${product.id}" data-name="${product.name}" 
                         data-price="${price}" data-img="${mainImg}" data-images="${allImages}">
                         Add to Bag
@@ -1338,7 +1338,7 @@ function applyFilters() {
     const category = activeCatBtn ? activeCatBtn.dataset.filter : 'all';
     
     const minPrice = parseInt(document.getElementById('min-range').value) || 0;
-    const maxPrice = parseInt(document.getElementById('max-range').value) || 1000000;
+    const maxPrice = parseInt(document.getElementById('max-range').value) || 5000000;
 
     products.forEach(prod => {
         const price = parseInt(prod.querySelector('.add-to-cart').dataset.price);
