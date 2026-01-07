@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details | Rajshree</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <style>
+        /* Specific styles for Detail Page */
+        .detail-page-container { margin-top: 140px; margin-bottom: 80px; }
+        .detail-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; align-items: start; }
+        
+        .gallery-container { position: sticky; top: 120px; }
+        
+        .thumb-list { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 5px; }
+        .detail-thumb { width: 80px; height: 80px; object-fit: cover; cursor: pointer; border: 1px solid #ddd; opacity: 0.6; transition: 0.3s; border-radius: 4px; }
+        .detail-thumb:hover, .detail-thumb.active { opacity: 1; border-color: #d4af37; transform: translateY(-2px); }
+
+        .product-info h1 { font-family: 'Cormorant Garamond', serif; font-size: 2.8rem; margin-bottom: 0.5rem; line-height: 1.2; }
+        .detail-price { font-size: 1.8rem; color: #d4af37; font-weight: 600; margin: 1rem 0; font-family: 'Cormorant Garamond', serif; }
+        .detail-meta { color: #666; font-size: 0.95rem; border-bottom: 1px solid #eee; padding-bottom: 1.5rem; margin-bottom: 1.5rem; }
+        .detail-desc { line-height: 1.8; color: #444; margin-bottom: 2rem; font-size: 1rem; }
+        
+        .action-buttons { display: flex; gap: 15px; align-items: center; }
+        .btn-large { padding: 15px 40px; font-size: 1rem; letter-spacing: 1px; }
+        
+        @media (max-width: 768px) {
+            .detail-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .detail-page-container { margin-top: 100px; }
+            .product-info h1 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="gold-ticker">
+        <div class="ticker-content" id="gold-ticker-content">Loading Rates...</div>
+    </div>
+
+    <!-- Navbar (Same as other pages) -->
+    <nav class="navbar">
+        <div class="container nav-wrapper">
+            <div class="brand-logo"><a href="index.html">RAJSHREE<span class="dot">.</span></a></div>
+            <nav class="nav-links" id="nav-links-container">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="collection.html">Collections</a></li>
+                    <li><a href="product.html">Featured</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="nav-icons">
+                <a href="wishlist.html" class="wishlist-icon"><i class="far fa-heart"></i></a>
+                <a href="cart.html" class="cart-icon-wrapper"><i class="fas fa-shopping-bag"></i><span class="cart-count">0</span></a>
+                <div class="hamburger" id="mobile-menu"><div class="line"></div><div class="line"></div><div class="line"></div></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Product Detail Section -->
+    <div class="container detail-page-container">
+        <!-- Navigation / Breadcrumbs -->
+        <div class="breadcrumb">
+            <a href="index.html">Home</a> <span>/</span> <a href="collection.html">Collections</a> <span>/</span> <span id="breadcrumb-name">Product</span>
+        </div>
+        <a href="javascript:history.back()" class="back-btn"><i class="fas fa-arrow-left"></i> Back to Collection</a>
+
+        <div class="detail-grid">
+            <!-- Left: Gallery -->
+            <div class="gallery-container">
+                <div class="detail-img-container" id="detailImgContainer">
+                    <img id="detail-main-img" src="" alt="Product Image">
+                    <button class="gallery-arrow prev" id="prevArrow"><i class="fas fa-chevron-left"></i></button>
+                    <button class="gallery-arrow next" id="nextArrow"><i class="fas fa-chevron-right"></i></button>
+                </div>
+                <div class="thumb-list" id="detail-thumbnails">
+                    <!-- Thumbnails injected via JS -->
+                </div>
+            </div>
+
+            <!-- Right: Info -->
+            <div class="product-info detail-info">
+                <h1 id="detail-title">Loading...</h1>
+                <div class="detail-price price" id="detail-price"></div>
+                <div class="detail-meta">
+                    <span id="detail-weight"></span> | <span id="detail-material" style="text-transform: capitalize;"></span>
+                </div>
+                <p class="detail-desc">
+                    Handcrafted with precision, this piece embodies the timeless elegance of royal heritage. 
+                    Designed for those who appreciate the finer things in life, it adds a touch of sophistication to any ensemble.
+                </p>
+                <div class="action-buttons">
+                    <button id="detail-add-btn" class="btn-gold btn-large">Add to Bag</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>RAJSHREE<span class="dot" style="color:var(--text-gold)">.</span></h3>
+                    <p>Timeless elegance crafted for the modern aristocracy. Discover the heritage of Jaipur in every detail.</p>
+                    <div class="social-icons">
+                        <i class="fab fa-instagram"></i>
+                        <i class="fab fa-facebook-f"></i>
+                        <i class="fab fa-pinterest-p"></i>
+                        <i class="fab fa-twitter"></i>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Collections</h4>
+                    <ul>
+                        <li><a href="collection.html">Bridal Trousseau</a></li>
+                        <li><a href="collection.html">Polki & Kundan</a></li>
+                        <li><a href="collection.html">Solitaires</a></li>
+                        <li><a href="collection.html">Temple Jewellery</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Customer Care</h4>
+                    <ul>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="contact.html">Book Appointment</a></li>
+                        <li><a href="shipping-returns.html">Shipping & Returns</a></li>
+                        <li><a href="care-guide.html">Care Guide</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe to receive updates on new arrivals and exclusive previews.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your Email Address">
+                        <button type="button">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Rajshree Jewellers. All Rights Reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <span style="margin:0 10px">|</span>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | Rajshree Jewellers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body>
+
+    <div class="gold-ticker">
+        <div class="ticker-content" id="gold-ticker-content">Loading Rates...</div>
+    </div>
+
+    <nav class="navbar">
+        <div class="container nav-wrapper">
+            <div class="brand-logo"><a href="index.html">RAJSHREE<span class="dot">.</span></a></div>
+            <nav class="nav-links" id="nav-links-container">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="collection.html">Collections</a></li>
+                    <li><a href="orders.html">My Orders</a></li>
+                </ul>
+            </nav>
+            <div class="nav-icons">
+                <a href="wishlist.html" class="wishlist-icon"><i class="fas fa-heart"></i></a>
+                <a href="cart.html" class="cart-icon-wrapper"><i class="fas fa-shopping-bag"></i></a>
+                <a href="#" class="profile-icon"><i class="fas fa-user-circle"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container collection-page">
+        <div class="section-header text-center" style="margin-bottom: 3rem;">
+            <h2 class="title">My Profile</h2>
+        </div>
+
+        <div class="collection-layout">
+            <aside class="sidebar">
+                <div class="filter-group">
+                    <button class="filter-btn active">Personal Details</button>
+                    <button class="filter-btn" onclick="window.location.href='orders.html'">My Orders</button>
+                    <button class="filter-btn" id="logout-btn" style="color:#ff4444;">Logout</button>
+                </div>
+            </aside>
+
+            <div class="profile-content">
+                <form id="profile-form" class="checkout-form">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <input type="text" id="profile-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <input type="email" id="profile-email" readonly style="opacity:0.6">
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <input type="tel" id="profile-phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Default Shipping Address</label>
+                        <textarea id="profile-address" rows="3"></textarea>
+                    </div>
+                    <button type="submit" class="btn-gold">Update Profile</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>RAJSHREE<span class="dot" style="color:var(--text-gold)">.</span></h3>
+                    <p>Timeless elegance crafted for the modern aristocracy.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Customer Care</h4>
+                    <ul>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="orders.html">My Orders</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Newsletter</h4>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your Email Address">
+                        <button type="button">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Rajshree Jewellers. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

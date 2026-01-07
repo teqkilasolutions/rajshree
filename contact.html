@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Rajshree Jewellers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Montserrat:wght@200;300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="gold-ticker">
+        <div class="ticker-content" id="gold-ticker-content">Loading Rates...</div>
+    </div>
+
+    <nav class="navbar">
+        <div class="container nav-wrapper">
+            <div class="brand-logo">
+                <a href="index.html">RAJSHREE<span class="dot">.</span></a>
+            </div>
+            <nav class="nav-links" id="nav-links-container">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="collection.html">Collections</a></li>
+                    <li><a href="product.html">Featured</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="nav-icons">
+                <a href="wishlist.html" class="wishlist-icon"><i class="far fa-heart"></i></a>
+                <a href="cart.html" class="cart-icon-wrapper">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </a>
+                <div class="hamburger" id="mobile-menu">
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                </div>
+            </div>
+            <a href="login.html" class="profile-icon">
+                <i class="far fa-user"></i>
+            </a>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <div class="overlay"></div>
+        <h2>Contact Us</h2>
+    </section>
+
+    <section class="contact-section section-padding">
+        <div class="container split-layout">
+            <div class="contact-info">
+                <h3>Get in Touch</h3>
+                <p>Visit our showroom or send us a message to book a private viewing.</p>
+                <div class="info-item">
+                    <strong>Address:</strong><br>12, Palace Road, Jaipur, Rajasthan
+                </div>
+                <div class="info-item">
+                    <strong>Phone:</strong><br>+91 98765 43210
+                </div>
+                <div class="map-placeholder">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d227748.3825624477!2d75.6504726!3d26.8854479!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396c4adf4c57e281%3A0xce1c63a0cf22e09!2sJaipur%2C%20Rajasthan!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                </div>
+            </div>
+
+            <div class="contact-form-wrapper">
+                <form id="contactForm" novalidate>
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" required>
+                        <small class="error-msg">Name is required</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" required>
+                        <small class="error-msg">Valid email is required</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" pattern="[0-9]{10}" required>
+                        <small class="error-msg">10-digit number required</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" rows="5" required></textarea>
+                        <small class="error-msg">Message cannot be empty</small>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+                    <div id="formSuccess" class="success-msg hidden">Thank you! We will contact you soon.</div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq-section section-padding" style="background: var(--bg-card);">
+        <div class="container">
+            <div class="section-header text-center" style="text-align: center; margin-bottom: 3rem;">
+                <span class="gold-accent">Help Center</span>
+                <h2 class="title">Frequently Asked Questions</h2>
+            </div>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <h4>Do you provide certification?</h4>
+                    <p>Yes, every piece of jewellery at Rajshree comes with a hallmark certification for gold and IGI/GIA certification for diamonds and gemstones.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Can I customize a design?</h4>
+                    <p>Absolutely. We specialize in bespoke jewellery. You can book an appointment with our designers to create a piece that is uniquely yours.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>What is your return policy?</h4>
+                    <p>We offer a 15-day exchange policy for unused items in their original packaging. Custom orders are not eligible for return but can be resized.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>Do you ship internationally?</h4>
+                    <p>Yes, we provide insured international shipping. Shipping charges and customs duties vary by destination.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>RAJSHREE<span class="dot" style="color:var(--text-gold)">.</span></h3>
+                    <p>Timeless elegance crafted for the modern aristocracy. Discover the heritage of Jaipur in every detail.</p>
+                    <div class="social-icons">
+                        <i class="fab fa-instagram"></i>
+                        <i class="fab fa-facebook-f"></i>
+                        <i class="fab fa-pinterest-p"></i>
+                        <i class="fab fa-twitter"></i>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Collections</h4>
+                    <ul>
+                        <li><a href="collection.html">Bridal Trousseau</a></li>
+                        <li><a href="collection.html">Polki & Kundan</a></li>
+                        <li><a href="collection.html">Solitaires</a></li>
+                        <li><a href="collection.html">Temple Jewellery</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Customer Care</h4>
+                    <ul>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="contact.html">Book Appointment</a></li>
+                        <li><a href="shipping-returns.html">Shipping & Returns</a></li>
+                        <li><a href="care-guide.html">Care Guide</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe to receive updates on new arrivals and exclusive previews.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your Email Address">
+                        <button type="button">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Rajshree Jewellers. All Rights Reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <span style="margin:0 10px">|</span>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

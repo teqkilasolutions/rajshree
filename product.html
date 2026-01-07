@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imperial Polki Set | Rajshree</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body>
+
+    <div class="gold-ticker">
+        <div class="ticker-content" id="gold-ticker-content">Loading Rates...</div>
+    </div>
+
+    <nav class="navbar">
+        <div class="container nav-wrapper">
+            <div class="brand-logo">
+                <a href="index.html">RAJSHREE<span class="dot">.</span></a>
+            </div>
+            <nav class="nav-links" id="nav-links-container">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="collection.html">Collections</a></li>
+                    <li><a href="product.html">Featured</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="nav-icons">
+                <a href="wishlist.html" class="wishlist-icon"><i class="far fa-heart"></i></a>
+                <a href="cart.html" class="cart-icon-wrapper">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </a>
+                <div class="hamburger" id="mobile-menu">
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                </div>
+            </div>
+            <a href="login.html" class="profile-icon">
+                <i class="far fa-user"></i>
+            </a>
+        </div>
+    </nav>
+
+    <div class="container product-detail-wrapper collection-page">
+        <div class="detail-img">
+            <button class="wishlist-btn" style="top:20px; right:20px;"><i class="far fa-heart"></i></button>
+            <img src="https://images.unsplash.com/photo-1543294001-f7cd5d7fb516?q=80&w=800&auto=format&fit=crop" alt="Bridal">
+        </div>
+        <div class="detail-info" data-weight="65" data-material="gold">
+            <small style="color:var(--text-gold); letter-spacing:2px; text-transform:uppercase;">Signature Collection</small>
+            <h1 class="gold-text">Imperial Polki Bridal Set</h1>
+            <span class="price">Calculating...</span>
+            <p class="desc">A masterpiece crafted in 22kt gold featuring uncut diamonds (Polki) and emerald beads. Designed for the bride who seeks royalty on her special day.</p>
+            
+            <ul style="margin-bottom:2rem; color:#888;">
+                <li>✓ 100% Hallmarked Gold</li>
+                <li>✓ Certified Gemstones</li>
+                <li>✓ Lifetime Maintenance</li>
+            </ul>
+
+            <button class="btn-gold btn-filled add-to-cart" 
+                data-id="99" 
+                data-name="Imperial Polki Bridal Set" 
+                data-img="https://images.unsplash.com/photo-1543294001-f7cd5d7fb516?q=80&w=800&auto=format&fit=crop">
+                Add to Royal Bag
+            </button>
+
+            <div class="share-options">
+                <span class="share-label">Share:</span>
+                <button class="share-btn" onclick="shareProduct('whatsapp')"><i class="fab fa-whatsapp"></i></button>
+                <button class="share-btn" onclick="shareProduct('facebook')"><i class="fab fa-facebook-f"></i></button>
+                <button class="share-btn" onclick="shareProduct('twitter')"><i class="fab fa-twitter"></i></button>
+                <button class="share-btn" onclick="shareProduct('copy')"><i class="fas fa-link"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <section class="related-products section-padding">
+        <div class="container">
+            <div class="section-header text-center" style="text-align: center; margin-bottom: 3rem;">
+                <span class="gold-accent">Complete The Look</span>
+                <h2 class="title">You May Also Like</h2>
+            </div>
+            
+            <div class="product-slider">
+                <div class="product-card">
+                    <div class="img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?q=80&w=600&auto=format&fit=crop" alt="Ring">
+                        <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        <div class="actions">
+                            <button class="add-to-cart" data-id="201" data-name="Solitaire Ring" data-img="https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?q=80&w=600&auto=format&fit=crop">Add to Bag</button>
+                        </div>
+                    </div>
+                    <div class="details">
+                        <h4>Solitaire Ring</h4>
+                        <span class="price">Calculating...</span>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=600&auto=format&fit=crop" alt="Necklace">
+                        <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        <div class="actions">
+                            <button class="add-to-cart" data-id="202" data-name="Ruby Haram" data-img="https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=600&auto=format&fit=crop">Add to Bag</button>
+                        </div>
+                    </div>
+                    <div class="details">
+                        <h4>Ruby Haram</h4>
+                        <span class="price">Calculating...</span>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="img-wrapper">
+                        <img src="https://images.unsplash.com/photo-1590119374033-2222964c92e3?q=80&w=600&auto=format&fit=crop" alt="Earrings">
+                        <button class="wishlist-btn"><i class="far fa-heart"></i></button>
+                        <div class="actions">
+                            <button class="add-to-cart" data-id="203" data-name="Chandbali" data-img="https://images.unsplash.com/photo-1590119374033-2222964c92e3?q=80&w=600&auto=format&fit=crop">Add to Bag</button>
+                        </div>
+                    </div>
+                    <div class="details">
+                        <h4>Chandbali</h4>
+                        <span class="price">Calculating...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>RAJSHREE<span class="dot" style="color:var(--text-gold)">.</span></h3>
+                    <p>Timeless elegance crafted for the modern aristocracy. Discover the heritage of Jaipur in every detail.</p>
+                    <div class="social-icons">
+                        <i class="fab fa-instagram"></i>
+                        <i class="fab fa-facebook-f"></i>
+                        <i class="fab fa-pinterest-p"></i>
+                        <i class="fab fa-twitter"></i>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Collections</h4>
+                    <ul>
+                        <li><a href="collection.html">Bridal Trousseau</a></li>
+                        <li><a href="collection.html">Polki & Kundan</a></li>
+                        <li><a href="collection.html">Solitaires</a></li>
+                        <li><a href="collection.html">Temple Jewellery</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Customer Care</h4>
+                    <ul>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="contact.html">Book Appointment</a></li>
+                        <li><a href="shipping-returns.html">Shipping & Returns</a></li>
+                        <li><a href="care-guide.html">Care Guide</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe to receive updates on new arrivals and exclusive previews.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your Email Address">
+                        <button type="button">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Rajshree Jewellers. All Rights Reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <span style="margin:0 10px">|</span>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

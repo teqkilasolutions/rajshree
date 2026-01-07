@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Rajshree Jewellers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <style>
+        .auth-container { max-width: 400px; margin: 0 auto; background: rgba(255,255,255,0.02); padding: 2rem; border: 1px solid var(--text-gold); text-align: center; }
+        .auth-tabs { display: flex; margin-bottom: 2rem; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .auth-tab { flex: 1; padding: 10px; cursor: pointer; color: #888; }
+        .auth-tab.active { color: var(--text-gold); border-bottom: 2px solid var(--text-gold); }
+        .auth-form { display: none; }
+        .auth-form.active { display: block; }
+    </style>
+</head>
+<body>
+
+    <div class="gold-ticker">
+        <div class="ticker-content" id="gold-ticker-content">Loading Rates...</div>
+    </div>
+
+    <nav class="navbar">
+        <div class="container nav-wrapper">
+            <div class="brand-logo">
+                <a href="index.html">RAJSHREE<span class="dot">.</span></a>
+            </div>
+            <nav class="nav-links" id="nav-links-container">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="collection.html">Collections</a></li>
+                    <li><a href="product.html">Featured</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="nav-icons">
+                <a href="wishlist.html" class="wishlist-icon"><i class="far fa-heart"></i></a>
+                <a href="cart.html" class="cart-icon-wrapper">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </a>
+                <div class="hamburger" id="mobile-menu">
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                </div>
+            </div>
+            <a href="login.html" class="profile-icon">
+                <i class="far fa-user"></i>
+            </a>
+        </div>
+    </nav>
+
+    <div class="container collection-page">
+        <div class="auth-container">
+            <div class="auth-tabs">
+                <div class="auth-tab active" onclick="switchTab('login')">Login</div>
+                <div class="auth-tab" onclick="switchTab('signup')">Sign Up</div>
+            </div>
+
+            <form id="login-form" class="auth-form active">
+                <div class="form-group">
+                    <input type="email" id="login-email" placeholder="Email Address" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="login-password" placeholder="Password" required>
+                </div>
+                <div style="text-align: right; margin-bottom: 1rem;">
+                    <a href="#" id="forgot-password-link" style="font-size: 0.8rem; color: var(--text-gold);">Forgot Password?</a>
+                </div>
+                <button type="submit" class="btn-gold btn-full">Login</button>
+            </form>
+
+            <form id="signup-form" class="auth-form">
+                <div class="form-group">
+                    <input type="text" id="signup-name" placeholder="Full Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="signup-email" placeholder="Email Address" required>
+                </div>
+                <div class="form-group">
+                    <input type="tel" id="signup-phone" placeholder="Phone Number" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" id="signup-password" placeholder="Password" required>
+                </div>
+                <button type="submit" class="btn-gold btn-full">Create Account</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div class="cart-modal-overlay" id="forgotPasswordModal">
+        <div class="cart-modal">
+            <div class="modal-icon"><i class="fas fa-lock"></i></div>
+            <h3 class="modal-title">Reset Password</h3>
+            <p class="modal-msg">Enter your email address to receive a reset link.</p>
+            <form id="reset-password-form">
+                <div class="form-group">
+                    <input type="email" id="reset-email" placeholder="Email Address" required>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-outline" onclick="document.getElementById('forgotPasswordModal').classList.remove('active')">Cancel</button>
+                    <button type="submit" class="btn-gold">Send Link</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function switchTab(tab) {
+            document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+            
+            if(tab === 'login') {
+                document.querySelectorAll('.auth-tab')[0].classList.add('active');
+                document.getElementById('login-form').classList.add('active');
+            } else {
+                document.querySelectorAll('.auth-tab')[1].classList.add('active');
+                document.getElementById('signup-form').classList.add('active');
+            }
+        }
+
+        document.getElementById('signup-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const user = {
+                name: document.getElementById('signup-name').value,
+                email: document.getElementById('signup-email').value,
+                phone: document.getElementById('signup-phone').value,
+                password: document.getElementById('signup-password').value,
+                address: ''
+            };
+            localStorage.setItem('rajshreeUser', JSON.stringify(user));
+            showGenericModal('Welcome', 'Account Created Successfully! Please Login.');
+            switchTab('login');
+        });
+
+        document.getElementById('login-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            const storedUser = JSON.parse(localStorage.getItem('rajshreeUser'));
+
+            if(storedUser && storedUser.email === email && storedUser.password === password) {
+                window.location.href = 'index.html';
+            } else {
+                showGenericModal('Error', 'Invalid Credentials');
+            }
+        });
+
+        document.getElementById('forgot-password-link').addEventListener('click', (e) => {
+            e.preventDefault();
+            document.getElementById('forgotPasswordModal').classList.add('active');
+        });
+
+        document.getElementById('reset-password-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            document.getElementById('forgotPasswordModal').classList.remove('active');
+            showGenericModal('Email Sent', 'If an account exists with this email, you will receive a password reset link shortly.');
+        });
+    </script>
+</body>
+</html>

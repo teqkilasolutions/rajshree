@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Bag | Rajshree</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+</head>
+<body>
+
+    <div class="gold-ticker">
+        <div class="ticker-content" id="gold-ticker-content">Loading Rates...</div>
+    </div>
+
+    <nav class="navbar">
+        <div class="container nav-wrapper">
+            <div class="brand-logo">
+                <a href="index.html">RAJSHREE<span class="dot">.</span></a>
+            </div>
+            <nav class="nav-links" id="nav-links-container">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="collection.html">Collections</a></li>
+                    <li><a href="product.html">Featured</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="nav-icons">
+                <a href="wishlist.html" class="wishlist-icon"><i class="far fa-heart"></i></a>
+                <a href="cart.html" class="cart-icon-wrapper">
+                    <i class="fas fa-shopping-bag"></i>
+                    <span class="cart-count">0</span>
+                </a>
+                <div class="hamburger" id="mobile-menu">
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                </div>
+            </div>
+            <a href="login.html" class="profile-icon">
+                <i class="far fa-user"></i>
+            </a>
+        </div>
+    </nav>
+
+    <div class="container collection-page">
+        <h2 class="section-title">Your Royal Bag</h2>
+        
+        <div class="cart-layout">
+            <div class="cart-items-wrapper">
+                <table class="cart-table">
+                    <thead>
+                        <tr>
+                            <th style="width:50%">Product</th>
+                            <th>Price</th>
+                            <th>Qty</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cart-items">
+                    </tbody>
+                </table>
+                <a href="collection.html" class="btn-outline" style="text-decoration:none; display:inline-block; margin-top:1rem;">← Continue Shopping</a>
+            </div>
+
+            <div class="cart-totals">
+                <h3>Cart Totals</h3>
+                <div class="summary-row"><span>Subtotal</span><span id="cart-subtotal">₹ 0</span></div>
+                <div class="coupon-form-wrapper">
+                    <input type="text" id="coupon-code" placeholder="Enter Coupon Code">
+                    <button id="apply-coupon-btn">Apply</button>
+                </div>
+                <div class="summary-row" id="discount-row" style="display: none;">
+                    <span>Discount</span>
+                    <span id="discount-amount" style="color: #4caf50;">- ₹ 0</span>
+                </div>
+                <div class="summary-row"><span>Shipping</span><span>Free</span></div>
+                <div class="summary-row"><span>Tax (3%)</span><span>Included</span></div>
+                <div class="summary-total"><span>Total</span><span id="cart-final-total">₹ 0</span></div>
+                <a href="checkout.html" class="btn-gold btn-full" style="text-decoration:none; display:block; margin-top:1.5rem;">Proceed to Checkout</a>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>RAJSHREE<span class="dot" style="color:var(--text-gold)">.</span></h3>
+                    <p>Timeless elegance crafted for the modern aristocracy. Discover the heritage of Jaipur in every detail.</p>
+                    <div class="social-icons">
+                        <i class="fab fa-instagram"></i>
+                        <i class="fab fa-facebook-f"></i>
+                        <i class="fab fa-pinterest-p"></i>
+                        <i class="fab fa-twitter"></i>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Collections</h4>
+                    <ul>
+                        <li><a href="collection.html">Bridal Trousseau</a></li>
+                        <li><a href="collection.html">Polki & Kundan</a></li>
+                        <li><a href="collection.html">Solitaires</a></li>
+                        <li><a href="collection.html">Temple Jewellery</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Customer Care</h4>
+                    <ul>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="contact.html">Book Appointment</a></li>
+                        <li><a href="shipping-returns.html">Shipping & Returns</a></li>
+                        <li><a href="care-guide.html">Care Guide</a></li>
+                        <li><a href="orders.html">My Orders</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Newsletter</h4>
+                    <p>Subscribe to receive updates on new arrivals and exclusive previews.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your Email Address">
+                        <button type="button">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Rajshree Jewellers. All Rights Reserved.</p>
+                <div class="footer-legal">
+                    <a href="#">Privacy Policy</a>
+                    <span style="margin:0 10px">|</span>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
