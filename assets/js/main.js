@@ -1633,10 +1633,15 @@ function loadFilterState() {
 
     if (minRange && maxRange) {
         minRange.value = state.minPrice;
-        maxRange.value = state.maxPrice;
+        // Fix: If stored max price is the old limit (500,000), update it to new limit (5,000,000)
+        if (parseInt(state.maxPrice) <= 500000) {
+            maxRange.value = 5000000;
+        } else {
+            maxRange.value = state.maxPrice;
+        }
+
         if (minVal) minVal.innerText = '₹ ' + parseInt(state.minPrice).toLocaleString();
-        if (maxVal) maxVal.innerText = '₹ ' + parseInt(state.maxPrice).toLocaleString();
-    }
+        if (maxVal) maxVal.innerText = '₹ ' + parseInt(maxRan
 
     // Restore Sort
     const sortSelect = document.getElementById('sort-select');
