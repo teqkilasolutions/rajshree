@@ -1641,7 +1641,8 @@ function loadFilterState() {
         }
 
         if (minVal) minVal.innerText = '₹ ' + parseInt(state.minPrice).toLocaleString();
-        if (maxVal) maxVal.innerText = '₹ ' + parseInt(maxRan
+        if (maxVal) maxVal.innerText = '₹ ' + parseInt(maxRange.value).toLocaleString();
+    }
 
     // Restore Sort
     const sortSelect = document.getElementById('sort-select');
