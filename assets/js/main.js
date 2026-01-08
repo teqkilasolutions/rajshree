@@ -1,5 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
     
+    // --- PAGINATION GLOBALS ---
+    window.itemsPerPage = 12; // Number of products per page
+    window.currentPage = 1;
+    window.currentFilteredProducts = [];
+    
     // --- 1. PRELOADER (Moved to top for safety) ---
     // This ensures the loader hides even if other scripts fail
     const preloader = document.querySelector('.preloader');
@@ -502,7 +507,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Filter Logic
     if (path.includes('collection.html')) {
-        renderProductsFromData(productsDatabase); // Render items from JS
+        // Initialize with all products
+        window.currentFilteredProducts = productsDatabase;
         initPriceFilter();
         
         // Load saved state
@@ -518,6 +524,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 btn.classList.add('active');
                 applyFilters();
                 saveFilterState();
+                // Scroll down on mobile after filtering
+                if (window.innerWidth <= 768) {
+                    document.getElementById('product-grid')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
             });
         });
         // Check for URL parameter to apply filter automatically
@@ -527,24 +537,33 @@ document.addEventListener('DOMContentLoaded', () => {
             const targetBtn = document.querySelector(`.filter-btn[data-filter="${categoryParam}"]`);
             if (targetBtn) targetBtn.click();
         } else {
-            // Apply loaded filters if no URL param
+            // Apply loaded filters (or default) which will trigger render
             applyFilters();
-            const sortSelect = document.getElementById('sort-select');
-            if(sortSelect) sortProducts(sortSelect.value);
         }
 
         // Sort Logic
         const sortSelect = document.getElementById('sort-select');
         if(sortSelect) {
             sortSelect.addEventListener('change', () => {
-                sortProducts(sortSelect.value);
+                // applyFilters handles sorting now
+                applyFilters();
                 saveFilterState();
+                // Scroll down on mobile after sorting
+                if (window.innerWidth <= 768) {
+                    document.getElementById('product-grid')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
             });
         }
         
         const applyPriceBtn = document.getElementById('apply-price');
         if(applyPriceBtn) {
-            applyPriceBtn.addEventListener('click', saveFilterState);
+            applyPriceBtn.addEventListener('click', () => {
+                applyFilters();
+                saveFilterState();
+                if (window.innerWidth <= 768) {
+                    document.getElementById('product-grid')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
         }
     }
 
@@ -1310,53 +1329,91 @@ function initPriceFilter() {
         });
     }
 
-    if(applyBtn) {
-        applyBtn.addEventListener('click', applyFilters);
-    }
 }
 
-function sortProducts(sortValue) {
-    const container = document.getElementById('product-grid');
-    if(!container) return;
+function renderPaginatedProducts() {
+    const startIndex = (window.currentPage - 1) * window.itemsPerPage;
+    const endIndex = startIndex + window.itemsPerPage;
+    const productsToShow = window.currentFilteredProducts.slice(startIndex, endIndex);
     
-    const products = Array.from(container.getElementsByClassName('product-card'));
+    renderProductsFromData(productsToShow);
+    renderPaginationControls();
+}
 
-    products.sort((a, b) => {
-        const priceA = parseInt(a.querySelector('.add-to-cart').dataset.price);
-        const priceB = parseInt(b.querySelector('.add-to-cart').dataset.price);
-        const indexA = parseInt(a.dataset.index);
-        const indexB = parseInt(b.dataset.index);
+function renderPaginationControls() {
+    // Remove existing pagination if any
+    const existingControls = document.getElementById('pagination-controls');
+    if (existingControls) existingControls.remove();
 
-        if (sortValue === 'low-high') return priceA - priceB;
-        else if (sortValue === 'high-low') return priceB - priceA;
-        else return indexA - indexB; // Default order
-    });
+    const grid = document.getElementById('product-grid');
+    if(!grid) return;
 
-    // Re-append in new order
-    products.forEach(p => container.appendChild(p));
+    const totalPages = Math.ceil(window.currentFilteredProducts.length / window.itemsPerPage);
+    if (totalPages <= 1) return;
+
+    const controls = document.createElement('div');
+    controls.id = 'pagination-controls';
+    controls.className = 'pagination';
+    
+    let html = '';
+    // Prev
+    html += `<button class="page-btn" ${window.currentPage === 1 ? 'disabled' : ''} onclick="changePage(${window.currentPage - 1})"><i class="fas fa-chevron-left"></i></button>`;
+    
+    // Numbers
+    for (let i = 1; i <= totalPages; i++) {
+            html += `<button class="page-btn ${i === window.currentPage ? 'active' : ''}" onclick="changePage(${i})">${i}</button>`;
+    }
+
+    // Next
+    html += `<button class="page-btn" ${window.currentPage === totalPages ? 'disabled' : ''} onclick="changePage(${window.currentPage + 1})"><i class="fas fa-chevron-right"></i></button>`;
+    
+    controls.innerHTML = html;
+    grid.parentNode.appendChild(controls);
+}
+
+window.changePage = function(page) {
+    const totalPages = Math.ceil(window.currentFilteredProducts.length / window.itemsPerPage);
+    if (page < 1 || page > totalPages) return;
+    window.currentPage = page;
+    renderPaginatedProducts();
+    document.getElementById('product-grid')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function applyFilters() {
-    const products = document.querySelectorAll('.product-card');
     const activeCatBtn = document.querySelector('.filter-btn.active');
     const category = activeCatBtn ? activeCatBtn.dataset.filter : 'all';
     
     const minPrice = parseInt(document.getElementById('min-range').value) || 0;
     const maxPrice = parseInt(document.getElementById('max-range').value) || 5000000;
+    const sortValue = document.getElementById('sort-select') ? document.getElementById('sort-select').value : 'default';
 
-    products.forEach(prod => {
-        const price = parseInt(prod.querySelector('.add-to-cart').dataset.price);
-        const prodCat = prod.dataset.category;
+    // Filter Data
+    let filtered = window.rajshreeProducts.filter(product => {
+        // Calculate price dynamically for filtering
+        const rates = window.rajshreeRates || { gold: 7150, silver: 94, platinum: 2800 };
+        const rate = rates[product.material] || rates.silver;
+        const metalCost = product.weight * rate;
+        const price = Math.ceil((metalCost * 1.15 * 1.03) / 100) * 100;
         
-        const catMatch = category === 'all' || prodCat === category;
+        // Store calculated price for sorting
+        product._calcPrice = price;
+
+        const catMatch = category === 'all' || product.category === category;
         const priceMatch = price >= minPrice && price <= maxPrice;
         
-        if (catMatch && priceMatch) {
-            prod.classList.remove('hidden');
-        } else {
-            prod.classList.add('hidden');
-        }
+        return catMatch && priceMatch;
     });
+
+    // Sort Data
+    if (sortValue === 'low-high') {
+        filtered.sort((a, b) => a._calcPrice - b._calcPrice);
+    } else if (sortValue === 'high-low') {
+        filtered.sort((a, b) => b._calcPrice - a._calcPrice);
+    }
+
+    window.currentFilteredProducts = filtered;
+    window.currentPage = 1; // Reset to page 1 on filter change
+    renderPaginatedProducts();
 }
 
 // --- AUTH SYSTEM ---

@@ -557,3 +557,35 @@ body.hovering .cursor-dot {
 }
 .back-to-top.visible { opacity: 1; pointer-events: all; }
 .back-to-top:hover { background: var(--text-gold); color: var(--bg-dark); transform: translateY(-5px); }
+
+/* --- PAGINATION --- */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 3rem;
+    width: 100%;
+}
+.page-btn {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--text-gold);
+    background: transparent;
+    color: var(--text-gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s;
+    font-family: var(--font-body);
+    font-size: 1rem;
+}
+.page-btn:hover, .page-btn.active {
+    background: var(--text-gold);
+    color: var(--bg-dark);
+}
+.page-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    border-color: rgba(212, 175, 55, 0.3);
+}
