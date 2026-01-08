@@ -252,7 +252,12 @@ a { text-decoration: none; color: inherit; transition: 0.3s; }
 .range-container input[type="range"]::-moz-range-thumb { width: 16px; height: 16px; background: var(--text-gold); border: none; border-radius: 50%; cursor: pointer; pointer-events: auto; box-shadow: 0 0 5px rgba(0,0,0,0.5); position: relative; z-index: 2; }
 .price-values { display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-gold); font-family: var(--font-body); margin-bottom: 10px; }
 
-.product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 30px; }
+.product-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); 
+    gap: 30px;
+    scroll-margin-top: 180px; /* Offset for fixed header */
+}
 .product-img { width: 100%; height: 300px; object-fit: cover; margin-bottom: 1rem; }
 .product-info { text-align: center; padding: 0 10px 10px; flex-grow: 1; display: flex; flex-direction: column; }
 .product-info .add-to-cart { margin-top: auto; }
