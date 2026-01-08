@@ -77,11 +77,11 @@
     .sidebar { margin-bottom: 2rem; }
     
     /* Product Detail */
-    .detail-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .product-detail-wrapper { grid-template-columns: 1fr; gap: 2rem; }
     .detail-img-container { height: 350px; }
     
     /* Fix Scrolling & Disable Zoom on Mobile */
-    .gallery-container { position: static; } /* Remove sticky behavior on mobile */
+    .gallery-container { position: static !important; } /* Remove sticky behavior on mobile */
     #detail-main-img.zoomed { transform: none !important; } /* Disable zoom scale */
     .detail-img-container { pointer-events: none; } /* Disable hover interactions */
     
