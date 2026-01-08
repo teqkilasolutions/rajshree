@@ -1,19 +1,32 @@
 document.addEventListener('DOMContentLoaded', () => {
     
+    // --- 1. PRELOADER (Moved to top for safety) ---
+    // This ensures the loader hides even if other scripts fail
+    const preloader = document.querySelector('.preloader');
+    if(preloader) {
+        setTimeout(() => {
+            preloader.classList.add('fade-out');
+        }, 1500);
+    }
+
     // --- 0. GLOBAL CONFIG & AUTH ---
-    // Rates will be fetched dynamically
-    window.rajshreeRates = { gold: 7150, silver: 94, platinum: 2800 };
-    updateGoldTicker(window.rajshreeRates); // Initialize ticker immediately
-    checkAuth();
-    highlightActiveLink();
-    fetchLiveRates();
-    updateWishlistButtons(); // Check status on load
-    initCustomCursor(); // Initialize Luxury Cursor
-    injectWhatsAppWidget(); // Add WhatsApp Button
-    initScrollFade(); // Initialize Scroll Fade
-    initMagneticEffect(); // Initialize Magnetic Buttons
-    initBackToTop(); // Initialize Back to Top
-    initClickSound(); // Initialize Click Sound
+    try {
+        // Rates will be fetched dynamically
+        window.rajshreeRates = { gold: 7150, silver: 94, platinum: 2800 };
+        updateGoldTicker(window.rajshreeRates); // Initialize ticker immediately
+        checkAuth();
+        highlightActiveLink();
+        fetchLiveRates();
+        updateWishlistButtons(); // Check status on load
+        initCustomCursor(); // Initialize Luxury Cursor
+        injectWhatsAppWidget(); // Add WhatsApp Button
+        initScrollFade(); // Initialize Scroll Fade
+        initMagneticEffect(); // Initialize Magnetic Buttons
+        initBackToTop(); // Initialize Back to Top
+        initClickSound(); // Initialize Click Sound
+    } catch (e) {
+        console.warn("Initialization error:", e);
+    }
 
     // --- 0.5. PRODUCT DATABASE ---
     // Add your items here. For multiple images, list them in the images array.
@@ -365,15 +378,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Expose to window if needed for other scripts, or just use locally
     window.rajshreeProducts = productsDatabase;
     
-    // --- 1. VISUAL ANIMATIONS (From Magazine Version) ---
-    
-    // Preloader
-    const preloader = document.querySelector('.preloader');
-    if(preloader) {
-        setTimeout(() => {
-            preloader.classList.add('fade-out');
-        }, 1500);
-    }
 
     // Scroll Reveal (Intersection Observer)
     const observerOptions = { threshold: 0.15, rootMargin: "0px 0px -50px 0px" };
@@ -1357,7 +1361,12 @@ function applyFilters() {
 
 // --- AUTH SYSTEM ---
 function checkAuth() {
-    const user = JSON.parse(localStorage.getItem('rajshreeUser'));
+    let user = null;
+    try {
+        user = JSON.parse(localStorage.getItem('rajshreeUser'));
+    } catch (e) {
+        console.warn('Auth storage access failed', e);
+    }
     const profileIcons = document.querySelectorAll('.profile-icon');
     
     profileIcons.forEach(icon => {
