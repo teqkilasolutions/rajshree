@@ -539,8 +539,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (window.innerWidth <= 768) {
                     setTimeout(() => {
                         const grid = document.getElementById('product-grid');
-                        if(grid) grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }, 1200);
+                        if (grid) {
+                            const headerOffset = 160; // Approx header height
+                            const elementPosition = grid.getBoundingClientRect().top;
+                            const offsetPosition = elementPosition + window.scrollY - headerOffset;
+                            window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+                        }
+                    }, 1000);
                 }
             }
         } else {
