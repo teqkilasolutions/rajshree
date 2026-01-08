@@ -53,6 +53,11 @@
     .hero-content .main-title {
         font-size: 3.5rem;
     }
+
+    .nav-icons {
+        gap: 1.2rem;
+    }
+    .profile-icon { margin-left: 0; }
 }
 
 /* Tablet & Mobile Common (Max Width 768px) */
@@ -133,6 +138,7 @@
     .nav-icons { gap: 15px; }
     .brand-logo a { font-size: 1.5rem; }
     
-    .hero-content { padding-top: 80px; }
+    .hero-content { padding-top: 60px; }
+    .description { font-size: 1rem; }
     .scroll-indicator { bottom: 20px; }
 }
