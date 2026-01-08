@@ -525,9 +525,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 applyFilters();
                 saveFilterState();
                 // Scroll down on mobile after filtering
-                if (window.innerWidth <= 768) {
-                    document.getElementById('product-grid')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
+                scrollToProductsMobile();
             });
         });
         // Check for URL parameter to apply filter automatically
@@ -549,9 +547,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 applyFilters();
                 saveFilterState();
                 // Scroll down on mobile after sorting
-                if (window.innerWidth <= 768) {
-                    document.getElementById('product-grid')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
+                scrollToProductsMobile();
             });
         }
         
@@ -560,9 +556,7 @@ document.addEventListener('DOMContentLoaded', () => {
             applyPriceBtn.addEventListener('click', () => {
                 applyFilters();
                 saveFilterState();
-                if (window.innerWidth <= 768) {
-                    document.getElementById('product-grid')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
+                scrollToProductsMobile();
             });
         }
     }
