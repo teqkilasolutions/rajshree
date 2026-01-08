@@ -533,7 +533,18 @@ document.addEventListener('DOMContentLoaded', () => {
         const categoryParam = urlParams.get('category');
         if (categoryParam) {
             const targetBtn = document.querySelector(`.filter-btn[data-filter="${categoryParam}"]`);
-            if (targetBtn) targetBtn.click();
+            if (targetBtn) {
+                targetBtn.click();
+                // Force scroll on mobile after page load (longer delay to override browser scroll restoration)
+                if (window.innerWidth <= 768) {
+                    setTimeout(() => {
+                        const grid = document.getElementById('product-grid');
+                        const headerOffset = 150; 
+                        const offsetPosition = grid.getBoundingClientRect().top + window.scrollY - headerOffset;
+                        window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+                    }, 800);
+                }
+            }
         } else {
             // Apply loaded filters (or default) which will trigger render
             applyFilters();
