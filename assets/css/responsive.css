@@ -75,6 +75,11 @@
     .detail-grid { grid-template-columns: 1fr; gap: 2rem; }
     .detail-img-container { height: 350px; }
     
+    /* Fix Scrolling & Disable Zoom on Mobile */
+    .gallery-container { position: static; } /* Remove sticky behavior on mobile */
+    #detail-main-img.zoomed { transform: none !important; } /* Disable zoom scale */
+    .detail-img-container { pointer-events: none; } /* Disable hover interactions */
+    
     /* Cart & Checkout */
     .cart-layout { grid-template-columns: 1fr; }
     .checkout-grid { grid-template-columns: 1fr; }

@@ -1677,14 +1677,12 @@ function initCustomCursor() {
             const posY = e.clientY;
 
             // Dot follows instantly
-            dot.style.left = `${posX}px`;
-            dot.style.top = `${posY}px`;
+            dot.style.transform = `translate(${posX}px, ${posY}px) translate(-50%, -50%)`;
 
             // Outline follows with slight delay/animation
             outline.animate({
-                left: `${posX}px`,
-                top: `${posY}px`
-            }, { duration: 500, fill: "forwards" });
+                transform: `translate(${posX}px, ${posY}px) translate(-50%, -50%)`
+            }, { duration: 500, fill: "forwards", easing: "ease-out" });
         });
 
         // Add hover effect for interactive elements
