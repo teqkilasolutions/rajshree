@@ -35,6 +35,8 @@
         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
             <h3>Product Management</h3>
             <div style="display: flex; gap: 1rem;">
+                <button onclick="expandAll()" class="btn-outline" style="padding: 8px 15px; font-size: 0.8rem;">Expand All</button>
+                <button onclick="collapseAll()" class="btn-outline" style="padding: 8px 15px; font-size: 0.8rem;">Collapse All</button>
                 <input type="text" id="search-product" placeholder="Search by name, ID or category..." style="padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid rgba(212,175,55,0.3); color: #fff; width: 300px;">
                 <button onclick="openProductModal()" class="btn-gold">Add New Product</button>
             </div>
@@ -140,6 +142,9 @@
 
         function renderTable(products) {
             const container = document.getElementById('products-container');
+            const searchInput = document.getElementById('search-product');
+            const isSearchActive = searchInput && searchInput.value.trim().length > 0;
+
             if (!products) products = window.rajshreeProducts || [];
             
             if (products.length === 0) {
@@ -157,8 +162,15 @@
 
             let html = '';
             for (const [category, items] of Object.entries(grouped)) {
+                const displayStyle = isSearchActive ? 'block' : 'none';
+                const iconClass = isSearchActive ? 'fa-chevron-down' : 'fa-chevron-right';
+
                 html += `
-                    <h4 style="margin-top: 2rem; color: var(--text-gold); text-transform: capitalize; border-bottom: 1px solid rgba(212,175,55,0.3); padding-bottom: 0.5rem;">${category} Collection (${items.length})</h4>
+                    <h4 onclick="toggleCategory(this)" style="margin-top: 2rem; color: var(--text-gold); text-transform: capitalize; border-bottom: 1px solid rgba(212,175,55,0.3); padding-bottom: 0.5rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                        ${category} Collection (${items.length}) 
+                        <i class="fas ${iconClass}"></i>
+                    </h4>
+                    <div class="category-content" style="display: ${displayStyle};">
                     <table class="product-table">
                         <thead>
                             <tr>
@@ -184,6 +196,7 @@
                             `).join('')}
                         </tbody>
                     </table>
+                    </div>
                 `;
             }
             container.innerHTML = html;
@@ -230,6 +243,34 @@
 
         window.closeCmsModal = function() {
             document.getElementById('cmsModal').classList.remove('active');
+        }
+
+        window.toggleCategory = function(header) {
+            const content = header.nextElementSibling;
+            const icon = header.querySelector('i');
+            if (content.style.display === 'none') {
+                content.style.display = 'block';
+                icon.className = 'fas fa-chevron-down';
+            } else {
+                content.style.display = 'none';
+                icon.className = 'fas fa-chevron-right';
+            }
+        }
+
+        window.expandAll = function() {
+            document.querySelectorAll('.category-content').forEach(el => el.style.display = 'block');
+            document.querySelectorAll('h4 i.fas').forEach(icon => {
+                icon.classList.remove('fa-chevron-right');
+                icon.classList.add('fa-chevron-down');
+            });
+        }
+
+        window.collapseAll = function() {
+            document.querySelectorAll('.category-content').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('h4 i.fas').forEach(icon => {
+                icon.classList.remove('fa-chevron-down');
+                icon.classList.add('fa-chevron-right');
+            });
         }
 
         window.addImageInput = function(value = '') {
