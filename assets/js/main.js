@@ -1999,7 +1999,7 @@ function injectProductModalStyles() {
         .modal-left { flex: 1.2; display: flex; flex-direction: column; gap: 1rem; }
         .modal-right { flex: 1; display: flex; flex-direction: column; gap: 1rem; justify-content: center; }
         .modal-img-container { width: 100%; height: 400px; overflow: hidden; border-radius: 4px; border: 1px solid #eee; position: relative; cursor: crosshair; }
-        #modalMainImg { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; transform-origin: center center; }
+        #modalMainImg { width: 100%; height: 100%; object-fit: contain; transition: transform 0.3s ease; transform-origin: center center; padding: 20px; }
         #modalMainImg.zoomed { transform: scale(2.5); }
         .modal-thumbnails { display: flex; gap: 10px; overflow-x: auto; padding-bottom: 5px; }
         .modal-thumb { width: 70px; height: 70px; object-fit: cover; cursor: pointer; border: 1px solid #ddd; opacity: 0.6; transition: 0.3s; border-radius: 4px; }
