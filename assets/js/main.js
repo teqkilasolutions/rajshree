@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 0.5. PRODUCT DATABASE ---
     // Add your items here. For multiple images, list them in the images array.
-    const productsDatabase = [
+    let productsDatabase = [
         {
             id: '1',
             name: 'Kundan Bridal Set',
@@ -260,7 +260,7 @@ document.addEventListener('DOMContentLoaded', () => {
             weight: 45,
             material: 'gold',
             size: '2.6',
-            images: ['assets/images/kada1-1.jpeg', 'assets/images/kada1-2.jpeg']
+            images: ['assets/images/Kada1-1.jpeg', 'assets/images/Kada1-2.jpeg']
         },
         {
             id: 'kada2',
@@ -332,7 +332,7 @@ document.addEventListener('DOMContentLoaded', () => {
             weight: 44,
             material: 'gold',
             size: '2.4',
-            images: [  'assets/images/kada9-1.jpeg', 'assets/images/kada9.jpeg',  'assets/images/kada9-2.jpeg']
+            images: ['assets/images/kada9.jpeg', 'assets/images/kada9-1.jpeg', 'assets/images/kada9-2.jpeg']
         },
         {
             id: 'kada10',
@@ -341,7 +341,7 @@ document.addEventListener('DOMContentLoaded', () => {
             weight: 38,
             material: 'gold',
             size: '2.6',
-            images: [ 'assets/images/kada10-1.jpeg', 'assets/images/kada10.jpeg',  'assets/images/kada10-2.jpeg']
+            images: ['assets/images/kada10.jpeg', 'assets/images/kada10-1.jpeg', 'assets/images/kada10-2.jpeg']
         },
         {
             id: 'kada11',
@@ -350,7 +350,7 @@ document.addEventListener('DOMContentLoaded', () => {
             weight: 46,
             material: 'gold',
             size: '2.4',
-            images: [ 'assets/images/kada11-1.jpeg', 'assets/images/kada11.jpeg',  'assets/images/kada11-2.jpeg']
+            images: ['assets/images/kada11.jpeg', 'assets/images/kada11-1.jpeg', 'assets/images/kada11-2.jpeg']
         },
         {
             id: 'kada12',
@@ -359,7 +359,7 @@ document.addEventListener('DOMContentLoaded', () => {
             weight: 52,
             material: 'gold',
             size: '2.8',
-            images: [ 'assets/images/kada12-1.jpeg', 'assets/images/kada12.jpeg',  'assets/images/kada12-2.jpeg']
+            images: ['assets/images/kada12.jpeg', 'assets/images/kada12-1.jpeg', 'assets/images/kada12-2.jpeg']
         },
         {
             id: 'kada13',
@@ -368,7 +368,7 @@ document.addEventListener('DOMContentLoaded', () => {
             weight: 58,
             material: 'gold',
             size: '2.6',
-            images: [ 'assets/images/kada13-1.jpeg', 'assets/images/kada13.jpeg',  'assets/images/kada13-2.jpeg']
+            images: ['assets/images/kada13.jpeg', 'assets/images/kada13-1.jpeg', 'assets/images/kada13-2.jpeg']
         },
         {
             id: 'kada14',
@@ -377,11 +377,451 @@ document.addEventListener('DOMContentLoaded', () => {
             weight: 75,
             material: 'gold',
             size: '2.4',
-            images: [  'assets/images/kada14-1.jpeg', 'assets/images/kada14.jpeg', 'assets/images/kada14-2.jpeg']
+            images: ['assets/images/kada14.jpeg', 'assets/images/kada14-1.jpeg', 'assets/images/kada14-2.jpeg']
+        },
+        // --- NEW RINGS COLLECTION ---
+        {
+            id: 'ring-new-1',
+            name: 'Royal Polki Ring',
+            category: 'rings',
+            weight: 12,
+            material: 'gold',
+            size: 'US 7',
+            images: [
+                'assets/images/ring/ring1 (1).JPG',
+                'assets/images/ring/ring1 (2).JPG',
+                'assets/images/ring/ring1 (3).JPG',
+                'assets/images/ring/ring1 (4).JPG',
+                'assets/images/ring/ring1 (5).JPG',
+                'assets/images/ring/ring1 (6).JPG',
+                'assets/images/ring/ring1 (7).JPG',
+                'assets/images/ring/ring1 (8).JPG'
+            ]
+        },
+        {
+            id: 'ring-new-2',
+            name: 'Ruby Statement Ring',
+            category: 'rings',
+            weight: 15,
+            material: 'gold',
+            size: 'US 8',
+            images: [
+                'assets/images/ring/ring2 (1).JPG',
+                'assets/images/ring/ring2 (2).JPG',
+                'assets/images/ring/ring2.JPG'
+            ]
+        },
+        {
+            id: 'ring-new-3',
+            name: 'Classic Gold Band',
+            category: 'rings',
+            weight: 8,
+            material: 'gold',
+            size: 'US 9',
+            images: [
+                'assets/images/ring/ring3 (1).JPG',
+                'assets/images/ring/ring3 (2).JPG',
+                'assets/images/ring/ring3 (3).JPG',
+                'assets/images/ring/ring3 (4).JPG',
+                'assets/images/ring/ring3 (5).JPG',
+                'assets/images/ring/ring3 (6).JPG',
+                'assets/images/ring/ring3 (7).JPG',
+                'assets/images/ring/ring3 (8).JPG',
+                'assets/images/ring/ring3 (9).JPG',
+                'assets/images/ring/ring3 (10).JPG'
+            ]
+        },
+        {
+            id: 'ring-new-4',
+            name: 'Diamond Halo Ring',
+            category: 'rings',
+            weight: 6,
+            material: 'platinum',
+            size: 'US 6',
+            images: [
+                'assets/images/ring/ring4 (1).JPG',
+                'assets/images/ring/ring4 (2).JPG',
+                'assets/images/ring/ring4 (3).JPG',
+                'assets/images/ring/ring4 (4).JPG',
+                'assets/images/ring/ring4 (5).JPG',
+                'assets/images/ring/ring4 (6).JPG',
+                'assets/images/ring/ring4 (7).JPG',
+                'assets/images/ring/ring4 (8).JPG',
+                'assets/images/ring/ring4 (9).JPG',
+                'assets/images/ring/ring4 (10).JPG',
+                'assets/images/ring/ring4 (11).JPG'
+            ]
+        },
+        {
+            id: 'ring-new-5',
+            name: 'Vintage Kundan Ring',
+            category: 'rings',
+            weight: 18,
+            material: 'gold',
+            size: 'Adjustable',
+            images: [
+                'assets/images/ring/ring5 (1).JPG',
+                'assets/images/ring/ring5 (2).JPG',
+                'assets/images/ring/ring5 (3).JPG',
+                'assets/images/ring/ring5 (4).JPG',
+                'assets/images/ring/ring5 (5).JPG',
+                'assets/images/ring/ring5 (6).JPG',
+                'assets/images/ring/ring5 (7).JPG'
+            ]
+        },
+        {
+            id: 'ring-new-6',
+            name: 'Sapphire Gold Ring',
+            category: 'rings',
+            weight: 10,
+            material: 'gold',
+            size: 'US 7',
+            images: [
+                'assets/images/ring/ring6 (1).JPG',
+                'assets/images/ring/ring6 (2).JPG',
+                'assets/images/ring/ring6 (3).JPG',
+                'assets/images/ring/ring6 (4).JPG',
+                'assets/images/ring/ring6 (5).JPG',
+                'assets/images/ring/ring6 (6).JPG',
+                'assets/images/ring/ring6 (7).JPG',
+                'assets/images/ring/ring6 (8).JPG',
+                'assets/images/ring/ring6 (9).JPG'
+            ]
+        },
+        {
+            id: 'ring-new-7',
+            name: 'Antique Temple Ring',
+            category: 'rings',
+            weight: 14,
+            material: 'gold',
+            size: 'Adjustable',
+            images: [
+                'assets/images/ring/ring7 (1).JPG',
+                'assets/images/ring/ring7 (2).JPG',
+                'assets/images/ring/ring7 (3).JPG',
+                'assets/images/ring/ring7 (4).JPG',
+                'assets/images/ring/ring7 (5).JPG',
+                'assets/images/ring/ring7 (6).JPG',
+                'assets/images/ring/ring7 (7).JPG'
+            ]
+        },
+        {
+            id: 'ring-new-8',
+            name: 'Floral Diamond Ring',
+            category: 'rings',
+            weight: 6,
+            material: 'gold',
+            size: 'US 7',
+            images: [
+                'assets/images/ring/ring8 (1).JPG',
+                'assets/images/ring/ring8 (2).JPG',
+                'assets/images/ring/ring8 (3).JPG',
+                'assets/images/ring/ring8 (4).JPG',
+                'assets/images/ring/ring8 (5).JPG',
+                'assets/images/ring/ring8 (6).JPG',
+                'assets/images/ring/ring8 (7).JPG',
+                'assets/images/ring/ring8 (8).JPG',
+                'assets/images/ring/ring8 (9).JPG',
+                'assets/images/ring/ring8 (10).JPG'
+            ]
+        },
+        {
+            id: 'ring-new-9',
+            name: 'Peacock Statement Ring',
+            category: 'rings',
+            weight: 18,
+            material: 'gold',
+            size: 'Adjustable',
+            images: [
+                'assets/images/ring/ring9 (1).JPG',
+                'assets/images/ring/ring9 (2).JPG',
+                'assets/images/ring/ring9 (3).JPG',
+                'assets/images/ring/ring9 (4).JPG',
+                'assets/images/ring/ring9 (5).JPG',
+                'assets/images/ring/ring9 (6).JPG',
+                'assets/images/ring/ring9 (7).JPG'
+            ]
+        },
+        {
+            id: 'ring-new-10',
+            name: 'Classic Solitaire',
+            category: 'rings',
+            weight: 4,
+            material: 'platinum',
+            size: 'US 6',
+            images: [
+                'assets/images/ring/ring10 (1).JPG',
+                'assets/images/ring/ring10 (2).JPG',
+                'assets/images/ring/ring10 (3).JPG',
+                'assets/images/ring/ring10 (4).JPG',
+                'assets/images/ring/ring10 (5).JPG',
+                'assets/images/ring/ring10 (6).JPG',
+                'assets/images/ring/ring10 (7).JPG',
+                'assets/images/ring/ring10 (8).JPG',
+                'assets/images/ring/ring10 (9).JPG',
+                'assets/images/ring/ring10 (10).JPG'
+            ]
+        },
+        {
+            id: 'ring-new-11',
+            name: 'Ruby Cluster Ring',
+            category: 'rings',
+            weight: 9,
+            material: 'gold',
+            size: 'US 8',
+            images: [
+                'assets/images/ring/ring11 (1).JPG',
+                'assets/images/ring/ring11 (2).JPG',
+                'assets/images/ring/ring11 (3).JPG',
+                'assets/images/ring/ring11 (4).JPG',
+                'assets/images/ring/ring11 (5).JPG',
+                'assets/images/ring/ring11 (6).JPG',
+                'assets/images/ring/ring11 (7).JPG'
+            ]
+        },
+        {
+            id: 'ring-new-12',
+            name: 'Traditional Gold Band',
+            category: 'rings',
+            weight: 8,
+            material: 'gold',
+            size: 'US 9',
+            images: [
+                'assets/images/ring/ring12 (1).JPG',
+                'assets/images/ring/ring12 (2).JPG',
+                'assets/images/ring/ring12 (3).JPG',
+                'assets/images/ring/ring12 (4).JPG',
+                'assets/images/ring/ring12 (5).JPG',
+                'assets/images/ring/ring12 (6).JPG',
+                'assets/images/ring/ring12 (7).JPG'
+            ]
+        },
+        {
+            id: 'ring-new-13',
+            name: 'Modern Mesh Ring',
+            category: 'rings',
+            weight: 7,
+            material: 'gold',
+            size: 'US 7',
+            images: [
+                'assets/images/ring/ring13 (1).JPG',
+                'assets/images/ring/ring13 (2).JPG',
+                'assets/images/ring/ring13 (3).JPG',
+                'assets/images/ring/ring13 (4).JPG',
+                'assets/images/ring/ring13 (5).JPG',
+                'assets/images/ring/ring13 (6).JPG',
+                'assets/images/ring/ring13 (7).JPG',
+                'assets/images/ring/ring13 (8).JPG'
+            ]
+        },
+        {
+            id: 'ring-new-14',
+            name: 'Bridal Polki Ring',
+            category: 'rings',
+            weight: 15,
+            material: 'gold',
+            size: 'Adjustable',
+            images: [
+                'assets/images/ring/ring14 (1).JPG',
+                'assets/images/ring/ring14 (2).JPG',
+                'assets/images/ring/ring14 (3).JPG',
+                'assets/images/ring/ring14 (4).JPG',
+                'assets/images/ring/ring14 (5).JPG',
+                'assets/images/ring/ring14 (6).JPG'
+            ]
+        },
+        {
+            id: 'ring-new-15',
+            name: 'Rose Gold Diamond',
+            category: 'rings',
+            weight: 5,
+            material: 'gold',
+            size: 'US 6',
+            images: [
+                'assets/images/ring/ring15 (1).JPG',
+                'assets/images/ring/ring15 (2).JPG',
+                'assets/images/ring/ring15 (3).JPG',
+                'assets/images/ring/ring15 (4).JPG',
+                'assets/images/ring/ring15 (5).JPG',
+                'assets/images/ring/ring15 (6).JPG',
+                'assets/images/ring/ring15 (7).JPG'
+            ]
+        },
+        {
+            id: 'ring-new-16',
+            name: 'Emerald Gold Ring',
+            category: 'rings',
+            weight: 10,
+            material: 'gold',
+            size: 'US 8',
+            images: [
+                'assets/images/ring/ring16 (1).JPG',
+                'assets/images/ring/ring16 (2).JPG',
+                'assets/images/ring/ring16 (3).JPG',
+                'assets/images/ring/ring16 (4).JPG',
+                'assets/images/ring/ring16 (5).JPG',
+                'assets/images/ring/ring16 (6).JPG',
+                'assets/images/ring/ring16 (7).JPG'
+            ]
+        },
+        {
+            id: 'ring-new-17',
+            name: 'Vintage Coin Ring',
+            category: 'rings',
+            weight: 12,
+            material: 'gold',
+            size: 'US 9',
+            images: [
+                'assets/images/ring/ring17 (1).JPG',
+                'assets/images/ring/ring17 (2).JPG',
+                'assets/images/ring/ring17 (3).JPG',
+                'assets/images/ring/ring17 (4).JPG',
+                'assets/images/ring/ring17 (5).JPG',
+                'assets/images/ring/ring17 (6).JPG',
+                'assets/images/ring/ring17 (7).JPG',
+                'assets/images/ring/ring17 (8).JPG',
+                'assets/images/ring/ring17 (9).JPG',
+                'assets/images/ring/ring17 (10).JPG',
+                'assets/images/ring/ring17 (11).JPG'
+            ]
+        },
+        {
+            id: 'ring-new-18',
+            name: 'Sapphire Halo Ring',
+            category: 'rings',
+            weight: 6,
+            material: 'platinum',
+            size: 'US 7',
+            images: [
+                'assets/images/ring/ring18 (1).JPG',
+                'assets/images/ring/ring18 (2).JPG',
+                'assets/images/ring/ring18 (3).JPG',
+                'assets/images/ring/ring18 (4).JPG',
+                'assets/images/ring/ring18 (5).JPG',
+                'assets/images/ring/ring18 (6).JPG',
+                'assets/images/ring/ring18 (7).JPG',
+                'assets/images/ring/ring18 (8).JPG'
+            ]
+        },
+        {
+            id: 'ring-new-19',
+            name: 'Kundan Flower Ring',
+            category: 'rings',
+            weight: 16,
+            material: 'gold',
+            size: 'Adjustable',
+            images: [
+                'assets/images/ring/ring19 (1).JPG',
+                'assets/images/ring/ring19 (2).JPG',
+                'assets/images/ring/ring19 (3).JPG',
+                'assets/images/ring/ring19 (4).JPG',
+                'assets/images/ring/ring19 (5).JPG',
+                'assets/images/ring/ring19 (6).JPG',
+                'assets/images/ring/ring19 (7).JPG'
+            ]
+        },
+        {
+            id: 'ring-new-20',
+            name: 'Royal Signet Ring',
+            category: 'rings',
+            weight: 20,
+            material: 'gold',
+            size: 'US 10',
+            images: [
+                'assets/images/ring/ring20 (1).JPG',
+                'assets/images/ring/ring20 (2).JPG',
+                'assets/images/ring/ring20 (3).JPG',
+                'assets/images/ring/ring20 (4).JPG',
+                'assets/images/ring/ring20 (5).JPG',
+                'assets/images/ring/ring20 (6).JPG',
+                'assets/images/ring/ring20 (7).JPG',
+                'assets/images/ring/ring20 (8).JPG',
+                'assets/images/ring/ring20 (9).JPG',
+                'assets/images/ring/ring20 (10).JPG',
+                'assets/images/ring/ring20 (11).JPG'
+            ]
         }
     ];
+
+    // --- DYNAMICALLY ADD RINGS 21-57 ---
+    // This automatically adds the remaining rings based on your file list
+    const ringCounts = {
+        21: 10, 22: 8, 23: 9, 24: 8, 25: 8, 26: 9, 27: 8, 28: 8, 29: 11, 30: 10,
+        31: 11, 32: 8, 33: 7, 34: 8, 35: 7, 36: 3, 37: 5, 38: 9, 39: 7, 40: 8,
+        41: 8, 42: 7, 43: 10, 44: 8, 45: 7, 46: 8, 47: 9, 49: 11, 50: 7,
+        51: 9, 52: 6, 53: 10, 54: 9, 55: 8, 56: 12, 57: 17
+    };
+
+    const ringAdjectives = [
+        "Imperial", "Majestic", "Regal", "Vintage", "Classic", "Modern", "Ethereal", "Timeless", "Grand", "Opulent",
+        "Heritage", "Divine", "Radiant", "Elegant", "Sophisticated", "Charming", "Graceful", "Exquisite", "Luxurious", "Precious"
+    ];
+
+    for (let i = 21; i <= 57; i++) {
+        if (i === 48) continue; // Missing in files
+        
+        const count = ringCounts[i] || 5;
+        const images = [];
+        for (let j = 1; j <= count; j++) {
+            images.push(`assets/images/ring/ring${i} (${j}).JPG`);
+        }
+
+        const nameIndex = (i - 21) % ringAdjectives.length;
+        const nameSuffix = i % 2 === 0 ? "Band" : "Ring";
+        
+        productsDatabase.push({
+            id: `ring-new-${i}`,
+            name: `${ringAdjectives[nameIndex]} Gold ${nameSuffix}`,
+            category: 'rings',
+            weight: Math.floor(Math.random() * (12 - 4 + 1)) + 4, // Random weight 4-12g
+            material: 'gold',
+            size: i % 3 === 0 ? 'Adjustable' : `US ${Math.floor(Math.random() * (9 - 6 + 1)) + 6}`,
+            images: images
+        });
+    }
+
+    // --- CMS: LOAD FROM STORAGE IF AVAILABLE ---
+    const storedProducts = localStorage.getItem('rajshreeProducts');
+    if (storedProducts) {
+        productsDatabase = JSON.parse(storedProducts);
+    } else {
+        // Initial save of default data
+        localStorage.setItem('rajshreeProducts', JSON.stringify(productsDatabase));
+    }
+
     // Expose to window if needed for other scripts, or just use locally
     window.rajshreeProducts = productsDatabase;
+    
+    // --- CMS FUNCTIONS ---
+    window.cms = {
+        login: (u, p) => {
+            if(u === 'admin' && p === 'admin123') {
+                localStorage.setItem('rajshreeAdmin', 'true');
+                return true;
+            }
+            return false;
+        },
+        logout: () => {
+            localStorage.removeItem('rajshreeAdmin');
+            window.location.href = 'login.html';
+        },
+        checkAuth: () => {
+            if(!localStorage.getItem('rajshreeAdmin')) window.location.href = 'login.html';
+        },
+        saveProduct: (product) => {
+            let products = window.rajshreeProducts;
+            const idx = products.findIndex(p => p.id === product.id);
+            if(idx >= 0) products[idx] = product;
+            else products.unshift(product);
+            localStorage.setItem('rajshreeProducts', JSON.stringify(products));
+            window.rajshreeProducts = products;
+        },
+        deleteProduct: (id) => {
+            let products = window.rajshreeProducts.filter(p => p.id !== id);
+            localStorage.setItem('rajshreeProducts', JSON.stringify(products));
+            window.rajshreeProducts = products;
+        }
+    };
     
 
     // Scroll Reveal (Intersection Observer)
@@ -1300,11 +1740,18 @@ function loadProductDetailPage(products) {
     const imgContainer = document.getElementById('detailImgContainer');
     imgContainer.addEventListener('mousemove', (e) => {
         const rect = imgContainer.getBoundingClientRect();
-        const x = ((e.clientX - rect.left) / rect.width) * 100;
-        const y = ((e.clientY - rect.top) / rect.height) * 100;
-        mainImg.style.transformOrigin = `${x}% ${y}%`;
+        const xPos = e.clientX - rect.left;
+        const safeMargin = 80; // Safe zone for arrows
+
+        if (xPos > safeMargin && xPos < (rect.width - safeMargin)) {
+            const x = (xPos / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            mainImg.style.transformOrigin = `${x}% ${y}%`;
+            mainImg.classList.add('zoomed');
+        } else {
+            mainImg.classList.remove('zoomed');
+        }
     });
-    imgContainer.addEventListener('mouseenter', () => mainImg.classList.add('zoomed'));
     imgContainer.addEventListener('mouseleave', () => {
         mainImg.classList.remove('zoomed');
         setTimeout(() => { mainImg.style.transformOrigin = 'center center'; }, 300);
@@ -1392,7 +1839,7 @@ function applyFilters() {
     const category = activeCatBtn ? activeCatBtn.dataset.filter : 'all';
     
     const minPrice = parseInt(document.getElementById('min-range').value) || 0;
-    const maxPrice = parseInt(document.getElementById('max-range').value) || 5000000;
+    const maxPrice = parseInt(document.getElementById('max-range').value) || 30000000;
     const sortValue = document.getElementById('sort-select') ? document.getElementById('sort-select').value : 'default';
 
     // Filter Data
@@ -1707,9 +2154,9 @@ function loadFilterState() {
 
     if (minRange && maxRange) {
         minRange.value = state.minPrice;
-        // Fix: If stored max price is the old limit (500,000), update it to new limit (5,000,000)
-        if (parseInt(state.maxPrice) <= 500000) {
-            maxRange.value = 5000000;
+        // Fix: If stored max price is the old limit, update it to new limit (30,000,000)
+        if (parseInt(state.maxPrice) <= 5000000) {
+            maxRange.value = 30000000;
         } else {
             maxRange.value = state.maxPrice;
         }
@@ -1737,18 +2184,24 @@ function initCustomCursor() {
         document.body.appendChild(dot);
         document.body.appendChild(outline);
 
+        let mouseX = 0, mouseY = 0;
+        let outlineX = 0, outlineY = 0;
+
         window.addEventListener('mousemove', (e) => {
-            const posX = e.clientX;
-            const posY = e.clientY;
-
+            mouseX = e.clientX;
+            mouseY = e.clientY;
             // Dot follows instantly
-            dot.style.transform = `translate(${posX}px, ${posY}px) translate(-50%, -50%)`;
-
-            // Outline follows with slight delay/animation
-            outline.animate({
-                transform: `translate(${posX}px, ${posY}px) translate(-50%, -50%)`
-            }, { duration: 500, fill: "forwards", easing: "ease-out" });
+            dot.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
         });
+
+        // Optimized: Use requestAnimationFrame for smooth outline follow
+        const animateOutline = () => {
+            outlineX += (mouseX - outlineX) * 0.15;
+            outlineY += (mouseY - outlineY) * 0.15;
+            outline.style.transform = `translate(${outlineX}px, ${outlineY}px) translate(-50%, -50%)`;
+            requestAnimationFrame(animateOutline);
+        };
+        animateOutline();
 
         // Add hover effect for interactive elements
         const interactables = document.querySelectorAll('a, button, .cat-card, .new-cat-card, .product-card, input, select, textarea, .whatsapp-float');
@@ -1774,12 +2227,18 @@ function initScrollFade() {
     const indicator = document.querySelector('.scroll-indicator');
     if (!indicator) return;
 
+    let ticking = false;
     window.addEventListener('scroll', () => {
-        // Fade out over the first 300px of scrolling
-        const maxScroll = 300;
-        let opacity = 1 - (window.scrollY / maxScroll);
-        if (opacity < 0) opacity = 0;
-        indicator.style.opacity = opacity;
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                const maxScroll = 300;
+                let opacity = 1 - (window.scrollY / maxScroll);
+                if (opacity < 0) opacity = 0;
+                indicator.style.opacity = opacity;
+                ticking = false;
+            });
+            ticking = true;
+        }
     });
 }
 
@@ -1787,18 +2246,27 @@ function initMagneticEffect() {
     const magnets = document.querySelectorAll('.btn-luxury, .btn-gold, .btn-outline, .btn-white');
 
     magnets.forEach(magnet => {
+        let rect = null;
+
+        magnet.addEventListener('mouseenter', () => {
+            rect = magnet.getBoundingClientRect(); // Cache rect to avoid reflows
+            magnet.style.transition = 'transform 0.1s ease-out';
+        });
+
         magnet.addEventListener('mousemove', (e) => {
-            const rect = magnet.getBoundingClientRect();
+            if(!rect) rect = magnet.getBoundingClientRect();
             const x = e.clientX - rect.left - rect.width / 2;
             const y = e.clientY - rect.top - rect.height / 2;
 
-            magnet.style.transform = `translate(${x / 5}px, ${y / 5}px)`;
-            magnet.style.transition = 'transform 0.2s ease-out';
+            requestAnimationFrame(() => {
+                magnet.style.transform = `translate(${x / 5}px, ${y / 5}px)`;
+            });
         });
 
         magnet.addEventListener('mouseleave', () => {
             magnet.style.transform = 'translate(0, 0)';
             magnet.style.transition = 'transform 0.5s ease';
+            rect = null;
         });
     });
 }
@@ -1809,9 +2277,16 @@ function initBackToTop() {
     btn.className = 'back-to-top';
     document.body.appendChild(btn);
 
+    let ticking = false;
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 400) btn.classList.add('visible');
-        else btn.classList.remove('visible');
+        if (!ticking) {
+            window.requestAnimationFrame(() => {
+                if (window.scrollY > 400) btn.classList.add('visible');
+                else btn.classList.remove('visible');
+                ticking = false;
+            });
+            ticking = true;
+        }
     });
 
     btn.addEventListener('click', () => {
@@ -1828,12 +2303,17 @@ function initClickSound() {
     });
 }
 
+let globalAudioCtx;
 function playClickSound() {
     // Create a subtle "pop" sound using Web Audio API
     const AudioContext = window.AudioContext || window.webkitAudioContext;
     if (!AudioContext) return;
     
-    const ctx = new AudioContext();
+    // Reuse context to prevent browser limit errors
+    if (!globalAudioCtx) globalAudioCtx = new AudioContext();
+    if (globalAudioCtx.state === 'suspended') globalAudioCtx.resume();
+    
+    const ctx = globalAudioCtx;
     const osc = ctx.createOscillator();
     const gain = ctx.createGain();
     

@@ -148,8 +148,12 @@ a { text-decoration: none; color: inherit; transition: 0.3s; }
 
 /* --- PARALLAX --- */
 .featured-parallax {
-    height: 70vh; background: url('https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?q=80&w=1600&auto=format&fit=crop') fixed center/cover;
+    height: 70vh; 
+    background-color: var(--bg-card); /* Fallback color */
     display: flex; align-items: center; justify-content: flex-end; padding-right: 10%; position: relative;
+}
+.featured-parallax.visible {
+    background: url('https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?q=80&w=1600&auto=format&fit=crop') fixed center/cover;
 }
 .featured-parallax::before { content:''; position: absolute; inset:0; background: rgba(0,0,0,0.5); }
 .parallax-content { background: rgba(10, 38, 27, 0.95); padding: 4rem; max-width: 500px; border: 1px solid var(--text-gold); position: relative; z-index: 2; }
@@ -513,6 +517,7 @@ a { text-decoration: none; color: inherit; transition: 0.3s; }
 /* Hide default cursor on fine pointer devices (Desktop) */
 @media (pointer: fine) {
     *, *::before, *::after { cursor: none !important; }
+    input, textarea, select { cursor: auto !important; }
 }
 /* Hover state for cursor */
 body.hovering .cursor-outline {
@@ -594,3 +599,11 @@ body.hovering .cursor-dot {
     cursor: not-allowed;
     border-color: rgba(212, 175, 55, 0.3);
 }
+
+/* --- PASSWORD TOGGLE --- */
+.password-wrapper { position: relative; }
+.password-toggle {
+    position: absolute; right: 15px; top: 50%; transform: translateY(-50%);
+    cursor: pointer !important; color: var(--text-gold); opacity: 0.7; transition: 0.3s; z-index: 2;
+}
+.password-toggle:hover { opacity: 1; }

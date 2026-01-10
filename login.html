@@ -63,10 +63,15 @@
 
             <form id="login-form" class="auth-form active">
                 <div class="form-group">
-                    <input type="email" id="login-email" placeholder="Email Address" required>
+                    <input type="text" id="login-email" placeholder="Email or Username" required>
                 </div>
-                <div class="form-group">
+                <div class="form-group password-wrapper">
                     <input type="password" id="login-password" placeholder="Password" required>
+                    <i class="far fa-eye password-toggle" id="togglePassword"></i>
+                </div>
+                <div class="form-group" style="display: flex; align-items: center; gap: 10px; text-align: left; margin-bottom: 1rem;">
+                    <input type="checkbox" id="remember-me" style="width: auto; cursor: pointer;">
+                    <label for="remember-me" style="color: #aaa; font-size: 0.8rem; cursor: pointer; margin: 0;">Remember Me</label>
                 </div>
                 <div style="text-align: right; margin-bottom: 1rem;">
                     <a href="#" id="forgot-password-link" style="font-size: 0.8rem; color: var(--text-gold);">Forgot Password?</a>
@@ -84,8 +89,9 @@
                 <div class="form-group">
                     <input type="tel" id="signup-phone" placeholder="Phone Number" required>
                 </div>
-                <div class="form-group">
+                <div class="form-group password-wrapper">
                     <input type="password" id="signup-password" placeholder="Password" required>
+                    <i class="far fa-eye password-toggle" id="toggleSignupPassword"></i>
                 </div>
                 <button type="submit" class="btn-gold btn-full">Create Account</button>
             </form>
@@ -100,7 +106,7 @@
             <p class="modal-msg">Enter your email address to receive a reset link.</p>
             <form id="reset-password-form">
                 <div class="form-group">
-                    <input type="email" id="reset-email" placeholder="Email Address" required>
+                    <input type="text" id="reset-email" placeholder="Email or Username" required>
                 </div>
                 <div class="modal-actions">
                     <button type="button" class="btn-outline" onclick="document.getElementById('forgotPasswordModal').classList.remove('active')">Cancel</button>
@@ -110,6 +116,7 @@
         </div>
     </div>
 
+    <script src="assets/js/main.js"></script>
     <script>
         function switchTab(tab) {
             document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
@@ -123,6 +130,29 @@
                 document.getElementById('signup-form').classList.add('active');
             }
         }
+
+        // Check for Remembered User
+        const rememberedUser = localStorage.getItem('rememberedUser');
+        if (rememberedUser) {
+            document.getElementById('login-email').value = rememberedUser;
+            document.getElementById('remember-me').checked = true;
+        }
+
+        // Password Toggle Logic
+        function setupPasswordToggle(toggleId, inputId) {
+            const toggle = document.getElementById(toggleId);
+            const input = document.getElementById(inputId);
+            if(toggle && input) {
+                toggle.addEventListener('click', function() {
+                    const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+                    input.setAttribute('type', type);
+                    this.classList.toggle('fa-eye');
+                    this.classList.toggle('fa-eye-slash');
+                });
+            }
+        }
+        setupPasswordToggle('togglePassword', 'login-password');
+        setupPasswordToggle('toggleSignupPassword', 'signup-password');
 
         document.getElementById('signup-form').addEventListener('submit', (e) => {
             e.preventDefault();
@@ -142,7 +172,20 @@
             e.preventDefault();
             const email = document.getElementById('login-email').value;
             const password = document.getElementById('login-password').value;
+            const rememberMe = document.getElementById('remember-me').checked;
+            
+            if (rememberMe) {
+                localStorage.setItem('rememberedUser', email);
+            } else {
+                localStorage.removeItem('rememberedUser');
+            }
             const storedUser = JSON.parse(localStorage.getItem('rajshreeUser'));
+
+            // Check for Admin Login
+            if (window.cms && window.cms.login(email, password)) {
+                window.location.href = 'admin-dashboard.html';
+                return;
+            }
 
             if(storedUser && storedUser.email === email && storedUser.password === password) {
                 window.location.href = 'index.html';
@@ -158,8 +201,14 @@
 
         document.getElementById('reset-password-form').addEventListener('submit', (e) => {
             e.preventDefault();
+            const email = document.getElementById('reset-email').value;
             document.getElementById('forgotPasswordModal').classList.remove('active');
-            showGenericModal('Email Sent', 'If an account exists with this email, you will receive a password reset link shortly.');
+            
+            if (email.toLowerCase() === 'admin' || email.toLowerCase().includes('admin')) {
+                showGenericModal('Admin Access', 'Admin password reset is restricted. Please contact system administrator.');
+            } else {
+                showGenericModal('Email Sent', 'If an account exists with this email, you will receive a password reset link shortly.');
+            }
         });
     </script>
 </body>

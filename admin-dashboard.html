@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Rajshree</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .admin-header { padding: 1rem 2rem; border-bottom: 1px solid var(--text-gold); display: flex; justify-content: space-between; align-items: center; background: var(--bg-card); }
+        .admin-content { padding: 2rem; max-width: 1400px; margin: 0 auto; }
+        .product-table { width: 100%; border-collapse: collapse; margin-top: 2rem; color: var(--text-cream); }
+        .product-table th, .product-table td { padding: 1rem; border-bottom: 1px solid rgba(255,255,255,0.1); text-align: left; }
+        .product-table th { color: var(--text-gold); }
+        .action-btn { padding: 5px 10px; cursor: pointer; margin-right: 5px; border: 1px solid var(--text-gold); background: transparent; color: var(--text-gold); }
+        .action-btn.delete { border-color: #ff4444; color: #ff4444; }
+        
+        /* Modal Styles */
+        .cms-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 2000; display: none; justify-content: center; align-items: center; }
+        .cms-modal.active { display: flex; }
+        .cms-modal-content { background: var(--bg-card); padding: 2rem; width: 90%; max-width: 600px; border: 1px solid var(--text-gold); max-height: 90vh; overflow-y: auto; }
+        .form-row { margin-bottom: 1rem; }
+        .form-row label { display: block; color: var(--text-gold); margin-bottom: 0.5rem; }
+        .form-row input, .form-row select { width: 100%; padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid rgba(212,175,55,0.3); color: #fff; }
+    </style>
+</head>
+<body>
+    <div class="admin-header">
+        <h2>Rajshree CMS</h2>
+        <button onclick="window.cms.logout()" class="btn-outline">Logout</button>
+    </div>
+
+    <div class="admin-content">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+            <h3>Product Management</h3>
+            <div style="display: flex; gap: 1rem;">
+                <input type="text" id="search-product" placeholder="Search by name, ID or category..." style="padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid rgba(212,175,55,0.3); color: #fff; width: 300px;">
+                <button onclick="openProductModal()" class="btn-gold">Add New Product</button>
+            </div>
+        </div>
+        
+        <div id="products-container"></div>
+    </div>
+
+    <!-- Add/Edit Modal -->
+    <div id="cmsModal" class="cms-modal">
+        <div class="cms-modal-content">
+            <h3 id="modalTitle" style="margin-bottom: 1.5rem;">Add Product</h3>
+            <form id="productForm">
+                <input type="hidden" id="p_id">
+                <div class="form-row">
+                    <label>Name</label>
+                    <input type="text" id="p_name" required>
+                </div>
+                <div class="form-row">
+                    <label>Category</label>
+                    <select id="p_category" required>
+                        <option value="kada">Kada</option>
+                        <option value="rings">Rings</option>
+                        <option value="necklaces">Necklaces</option>
+                        <option value="earrings">Earrings</option>
+                        <option value="sets">Sets</option>
+                        <option value="bracelets">Bracelets</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <label>Weight (g)</label>
+                    <input type="number" id="p_weight" step="0.01" required>
+                </div>
+                <div class="form-row">
+                    <label>Material</label>
+                    <select id="p_material" required>
+                        <option value="gold">Gold</option>
+                        <option value="platinum">Platinum</option>
+                        <option value="silver">Silver</option>
+                    </select>
+                </div>
+                <div class="form-row">
+                    <label>Size</label>
+                    <input type="text" id="p_size">
+                </div>
+                <div class="form-row">
+                    <label>Product Images</label>
+                    <div id="image-inputs-container"></div>
+                    <button type="button" class="btn-outline" onclick="addImageInput()" style="margin-top: 5px; font-size: 0.8rem; padding: 5px 10px;">+ Add Image URL</button>
+                </div>
+                <div style="display: flex; gap: 10px; margin-top: 2rem;">
+                    <button type="submit" class="btn-gold">Save Product</button>
+                    <button type="button" class="btn-outline" onclick="closeCmsModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="assets/js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if(window.cms) window.cms.checkAuth();
+            renderTable();
+
+            // Search Logic
+            document.getElementById('search-product').addEventListener('input', (e) => {
+                const term = e.target.value.toLowerCase();
+                const allProducts = window.rajshreeProducts || [];
+                const filtered = allProducts.filter(p => 
+                    p.name.toLowerCase().includes(term) || 
+                    p.category.toLowerCase().includes(term) ||
+                    p.id.toLowerCase().includes(term)
+                );
+                renderTable(filtered);
+            });
+
+            document.getElementById('productForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const id = document.getElementById('p_id').value || 'prod-' + Date.now();
+                const imageInputs = document.querySelectorAll('.image-url-input');
+                const images = Array.from(imageInputs).map(input => input.value.trim()).filter(val => val !== '');
+
+                if (images.length === 0) {
+                    alert("Please add at least one image.");
+                    return;
+                }
+
+                const product = {
+                    id: id,
+                    name: document.getElementById('p_name').value,
+                    category: document.getElementById('p_category').value,
+                    weight: parseFloat(document.getElementById('p_weight').value),
+                    material: document.getElementById('p_material').value,
+                    size: document.getElementById('p_size').value,
+                    images: images
+                };
+
+                window.cms.saveProduct(product);
+                closeCmsModal();
+                renderTable();
+            });
+        });
+
+        function renderTable(products) {
+            const container = document.getElementById('products-container');
+            if (!products) products = window.rajshreeProducts || [];
+            
+            if (products.length === 0) {
+                container.innerHTML = '<p style="text-align:center; padding:2rem; color: #aaa;">No products found.</p>';
+                return;
+            }
+
+            // Group products by category
+            const grouped = products.reduce((acc, product) => {
+                const cat = product.category || 'Uncategorized';
+                if (!acc[cat]) acc[cat] = [];
+                acc[cat].push(product);
+                return acc;
+            }, {});
+
+            let html = '';
+            for (const [category, items] of Object.entries(grouped)) {
+                html += `
+                    <h4 style="margin-top: 2rem; color: var(--text-gold); text-transform: capitalize; border-bottom: 1px solid rgba(212,175,55,0.3); padding-bottom: 0.5rem;">${category} Collection (${items.length})</h4>
+                    <table class="product-table">
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Weight (g)</th>
+                                <th>Material</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${items.map(p => `
+                                <tr>
+                                    <td><img src="${p.images[0]}" style="width:50px; height:50px; object-fit:cover;"></td>
+                                    <td>${p.name}</td>
+                                    <td>${p.weight}</td>
+                                    <td style="text-transform:capitalize">${p.material}</td>
+                                    <td>
+                                        <button class="action-btn" onclick="editProduct('${p.id}')">Edit</button>
+                                        <button class="action-btn delete" onclick="deleteProd('${p.id}')">Delete</button>
+                                    </td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                `;
+            }
+            container.innerHTML = html;
+        }
+
+        function openProductModal() {
+            document.getElementById('productForm').reset();
+            document.getElementById('p_id').value = '';
+            document.getElementById('image-inputs-container').innerHTML = '';
+            addImageInput(); // Add initial empty input
+            document.getElementById('modalTitle').innerText = 'Add Product';
+            document.getElementById('cmsModal').classList.add('active');
+        }
+
+        window.editProduct = function(id) {
+            const p = window.rajshreeProducts.find(prod => prod.id === id);
+            if(!p) return;
+            
+            document.getElementById('p_id').value = p.id;
+            document.getElementById('p_name').value = p.name;
+            document.getElementById('p_category').value = p.category;
+            document.getElementById('p_weight').value = p.weight;
+            document.getElementById('p_material').value = p.material;
+            document.getElementById('p_size').value = p.size || '';
+            
+            const container = document.getElementById('image-inputs-container');
+            container.innerHTML = '';
+            if(p.images && p.images.length > 0) {
+                p.images.forEach(img => addImageInput(img));
+            } else {
+                addImageInput();
+            }
+            
+            document.getElementById('modalTitle').innerText = 'Edit Product';
+            document.getElementById('cmsModal').classList.add('active');
+        }
+
+        window.deleteProd = function(id) {
+            if(confirm('Delete this product?')) {
+                window.cms.deleteProduct(id);
+                renderTable();
+            }
+        }
+
+        window.closeCmsModal = function() {
+            document.getElementById('cmsModal').classList.remove('active');
+        }
+
+        window.addImageInput = function(value = '') {
+            const container = document.getElementById('image-inputs-container');
+            const wrapper = document.createElement('div');
+            wrapper.style.display = 'flex';
+            wrapper.style.gap = '10px';
+            wrapper.style.marginBottom = '10px';
+            
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.value = value;
+            input.placeholder = 'assets/images/...';
+            input.className = 'image-url-input';
+            input.required = true;
+            
+            const removeBtn = document.createElement('button');
+            removeBtn.type = 'button';
+            removeBtn.innerText = '×';
+            removeBtn.className = 'btn-danger';
+            removeBtn.style.marginTop = '0';
+            removeBtn.style.padding = '0 12px';
+            removeBtn.onclick = () => wrapper.remove();
+            
+            wrapper.appendChild(input);
+            wrapper.appendChild(removeBtn);
+            container.appendChild(wrapper);
+        }
+    </script>
+</body>
+</html>
