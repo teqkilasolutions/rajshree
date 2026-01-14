@@ -1183,6 +1183,18 @@ function applyFilters() {
     renderPaginatedProducts();
 }
 
+function scrollToProductsMobile() {
+    if (window.innerWidth <= 768) {
+        const grid = document.getElementById('product-grid');
+        if (grid) {
+            const headerOffset = 160; // Approx header height
+            const elementPosition = grid.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.scrollY - headerOffset;
+            window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+        }
+    }
+}
+
 // --- AUTH SYSTEM ---
 function checkAuth() {
     let user = null;

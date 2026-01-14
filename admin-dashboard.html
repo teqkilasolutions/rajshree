@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard | Rajshree</title>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2250%22 fill=%22%23d4af37%22/></svg>">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -37,7 +38,6 @@
             <div style="display: flex; gap: 1rem;">
                 <button onclick="expandAll()" class="btn-outline" style="padding: 8px 15px; font-size: 0.8rem;">Expand All</button>
                 <button onclick="collapseAll()" class="btn-outline" style="padding: 8px 15px; font-size: 0.8rem;">Collapse All</button>
-                <button onclick="uploadInitialData()" class="btn-outline" style="padding: 8px 15px; font-size: 0.8rem; border-color: #ff9800; color: #ff9800;" title="Upload local JSON to Firebase">Upload Initial Data (One-Time)</button>
                 <input type="text" id="search-product" placeholder="Search by name, ID or category..." style="padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid rgba(212,175,55,0.3); color: #fff; width: 300px;">
                 <button onclick="openProductModal()" class="btn-gold">Add New Product</button>
             </div>
@@ -369,34 +369,6 @@
             wrapper.appendChild(downloadLink);
             wrapper.appendChild(removeBtn);
             container.appendChild(wrapper);
-        }
-
-        // ONE-TIME UPLOAD FUNCTION
-        window.uploadInitialData = function() {
-            if (!confirm("This will upload all products from your local products.json file to Firebase. This should only be done ONCE. Are you sure?")) {
-                return;
-            }
-
-            fetch('assets/data/products.json')
-                .then(response => response.json())
-                .then(products => {
-                    const batch = db.batch();
-                    let count = 0;
-
-                    products.forEach(product => {
-                        const { id, ...productData } = product; // Don't store ID field inside doc
-                        if (id) { // Ensure product has an ID
-                            const docRef = db.collection("products").doc(id);
-                            batch.set(docRef, productData);
-                            count++;
-                        }
-                    });
-
-                    return batch.commit().then(() => {
-                        alert(`${count} products have been successfully uploaded to Firebase! You can now remove the 'Upload' button from admin-dashboard.html.`);
-                    });
-                })
-                .catch(error => console.error("Error during batch upload: ", error));
         }
     </script>
 </body>
