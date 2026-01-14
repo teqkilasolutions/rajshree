@@ -33,48 +33,46 @@ document.addEventListener('DOMContentLoaded', () => {
         console.warn("Initialization error:", e);
     }
 
-    // --- 0.5. PRODUCT DATABASE (FETCH FROM JSON) ---
+    // --- 0.5. PRODUCT DATABASE (FETCH FROM FIREBASE) ---
     let productsDatabase = [];
+    const productsRef = db.collection('products');
 
-    // --- CMS: LOAD FROM STORAGE IF AVAILABLE ---
-    try {
-        const storedProducts = localStorage.getItem('rajshreeProducts');
-        if (storedProducts) {
-            productsDatabase = JSON.parse(storedProducts);
+    productsRef.onSnapshot(
+        (snapshot) => {
+            console.log("Firebase data received!");
+            productsDatabase = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            
+            // Sort alphabetically for consistent order
+            productsDatabase.sort((a, b) => a.name.localeCompare(b.name));
+
             window.rajshreeProducts = productsDatabase;
-        } else {
-            // Fetch from JSON file
-            fetch('assets/data/products.json')
-                .then(response => response.json())
-                .then(data => {
-                    productsDatabase = data;
-                    window.rajshreeProducts = productsDatabase;
-                    // Apply Google Drive fix
-                    productsDatabase.forEach(p => {
-                        if(p.images && Array.isArray(p.images)) {
-                            p.images = p.images.map(img => convertGoogleDriveLink(img));
-                        }
-                    });
-                    // Save to local storage for persistence during session
-                    localStorage.setItem('rajshreeProducts', JSON.stringify(productsDatabase));
-                    
-                    // Re-run any logic that depends on products
-                    if (window.location.pathname.includes('collection.html')) {
-                        window.currentFilteredProducts = productsDatabase;
-                        applyFilters();
-                    }
-                    if (window.location.pathname.includes('product-detail.html')) {
-                        loadProductDetailPage(productsDatabase);
-                    }
-                    if (window.location.pathname.includes('admin-dashboard.html')) {
-                        if(typeof renderTable === 'function') renderTable();
-                    }
-                })
-                .catch(err => console.error('Error loading products:', err));
+
+            // Apply Google Drive fix
+            productsDatabase.forEach(p => {
+                if(p.images && Array.isArray(p.images)) {
+                    p.images = p.images.map(img => convertGoogleDriveLink(img));
+                }
+            });
+            
+            // Re-run UI logic that depends on products. This enables real-time updates.
+            if (window.location.pathname.includes('collection.html')) {
+                window.currentFilteredProducts = productsDatabase;
+                applyFilters();
+            }
+            if (window.location.pathname.includes('product-detail.html')) {
+                loadProductDetailPage(productsDatabase);
+            }
+            if (window.location.pathname.includes('admin-dashboard.html')) {
+                if(typeof renderTable === 'function') renderTable();
+            }
+            // Update pricing on all pages
+            if (window.rajshreeRates) initDynamicPricing(window.rajshreeRates);
+        },
+        (error) => {
+            console.error("Error fetching products from Firebase: ", error);
+            alert("Could not connect to the product database. Please check your internet connection or contact support.");
         }
-    } catch (e) {
-        console.error("Error loading products from storage:", e);
-    }
+    );
 
     // --- FIX: GOOGLE DRIVE IMAGE LINKS ---
     const convertGoogleDriveLink = (url) => {
@@ -112,17 +110,28 @@ document.addEventListener('DOMContentLoaded', () => {
             if(product.images && Array.isArray(product.images)) {
                 product.images = product.images.map(img => convertGoogleDriveLink(img));
             }
-            let products = window.rajshreeProducts;
-            const idx = products.findIndex(p => p.id === product.id);
-            if(idx >= 0) products[idx] = product;
-            else products.unshift(product);
-            localStorage.setItem('rajshreeProducts', JSON.stringify(products));
-            window.rajshreeProducts = products;
+            
+            const { id, ...productData } = product;
+            
+            db.collection('products').doc(id).set(productData)
+                .then(() => {
+                    console.log("Product saved to Firebase!");
+                    // No need to manually update local state, onSnapshot will do it.
+                })
+                .catch((error) => {
+                    console.error("Error writing document: ", error);
+                    alert("Error saving product to the database.");
+                });
         },
         deleteProduct: (id) => {
-            let products = window.rajshreeProducts.filter(p => p.id !== id);
-            localStorage.setItem('rajshreeProducts', JSON.stringify(products));
-            window.rajshreeProducts = products;
+            db.collection('products').doc(id).delete()
+                .then(() => {
+                    console.log("Product deleted from Firebase!");
+                })
+                .catch((error) => {
+                    console.error("Error removing document: ", error);
+                    alert("Error deleting product from the database.");
+                });
         }
     };
     

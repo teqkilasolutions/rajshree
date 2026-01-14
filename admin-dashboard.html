@@ -37,7 +37,7 @@
             <div style="display: flex; gap: 1rem;">
                 <button onclick="expandAll()" class="btn-outline" style="padding: 8px 15px; font-size: 0.8rem;">Expand All</button>
                 <button onclick="collapseAll()" class="btn-outline" style="padding: 8px 15px; font-size: 0.8rem;">Collapse All</button>
-                <button onclick="saveData()" class="btn-outline" style="padding: 8px 15px; font-size: 0.8rem; border-color: #4caf50; color: #4caf50;" title="Save changes to file">Save Changes</button>
+                <button onclick="uploadInitialData()" class="btn-outline" style="padding: 8px 15px; font-size: 0.8rem; border-color: #ff9800; color: #ff9800;" title="Upload local JSON to Firebase">Upload Initial Data (One-Time)</button>
                 <input type="text" id="search-product" placeholder="Search by name, ID or category..." style="padding: 10px; background: rgba(255,255,255,0.05); border: 1px solid rgba(212,175,55,0.3); color: #fff; width: 300px;">
                 <button onclick="openProductModal()" class="btn-gold">Add New Product</button>
             </div>
@@ -277,25 +277,6 @@
             });
         }
 
-        window.saveData = function() {
-            fetch('/api/save-products', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(window.rajshreeProducts)
-            })
-            .then(response => response.json())
-            .then(data => {
-                if(data.success) {
-                    alert('Changes saved successfully! You can now commit to Git.');
-                } else {
-                    alert('Error saving: ' + data.message);
-                }
-            })
-            .catch(err => {
-                alert('Could not connect to local server. Make sure you are running "node server.js".');
-            });
-        }
-
         window.addImageInput = function(value = '') {
             const container = document.getElementById('image-inputs-container');
             const wrapper = document.createElement('div');
@@ -384,6 +365,34 @@
             wrapper.appendChild(downloadLink);
             wrapper.appendChild(removeBtn);
             container.appendChild(wrapper);
+        }
+
+        // ONE-TIME UPLOAD FUNCTION
+        window.uploadInitialData = function() {
+            if (!confirm("This will upload all products from your local products.json file to Firebase. This should only be done ONCE. Are you sure?")) {
+                return;
+            }
+
+            fetch('assets/data/products.json')
+                .then(response => response.json())
+                .then(products => {
+                    const batch = db.batch();
+                    let count = 0;
+
+                    products.forEach(product => {
+                        const { id, ...productData } = product; // Don't store ID field inside doc
+                        if (id) { // Ensure product has an ID
+                            const docRef = db.collection("products").doc(id);
+                            batch.set(docRef, productData);
+                            count++;
+                        }
+                    });
+
+                    return batch.commit().then(() => {
+                        alert(`${count} products have been successfully uploaded to Firebase! You can now remove the 'Upload' button from admin-dashboard.html.`);
+                    });
+                })
+                .catch(error => console.error("Error during batch upload: ", error));
         }
     </script>
 </body>
