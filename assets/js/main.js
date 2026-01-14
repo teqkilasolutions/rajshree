@@ -33,761 +33,60 @@ document.addEventListener('DOMContentLoaded', () => {
         console.warn("Initialization error:", e);
     }
 
-    // --- 0.5. PRODUCT DATABASE ---
-    // Add your items here. For multiple images, list them in the images array.
-    let productsDatabase = [
-        {
-            id: '1',
-            name: 'Kundan Bridal Set',
-            category: 'sets',
-            weight: 35,
-            material: 'gold',
-            size: 'Adjustable',
-            images: [
-                'https://images.unsplash.com/photo-1543294001-f7cd5d7fb516?q=80&w=600&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1543294001-f7cd5d7fb516?q=80&w=600&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1543294001-f7cd5d7fb516?q=80&w=600&auto=format&fit=crop'
-            ]
-        },
-        {
-            id: '2',
-            name: 'Emerald Gold Ring',
-            category: 'rings',
-            weight: 8,
-            material: 'gold',
-            size: 'US 7',
-            images: [
-                'https://images.unsplash.com/photo-1605100804763-247f67b3557e?q=80&w=600&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1605100804763-247f67b3557e?q=80&w=600&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1605100804763-247f67b3557e?q=80&w=600&auto=format&fit=crop'
-            ]
-        },
-        {
-            id: '3',
-            name: 'Temple Jhumkas',
-            category: 'earrings',
-            weight: 12,
-            material: 'gold',
-            size: 'Standard',
-            images: [
-                'https://images.unsplash.com/photo-1535632787350-4e68ef0ac584?q=80&w=600&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1535632787350-4e68ef0ac584?q=80&w=600&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1535632787350-4e68ef0ac584?q=80&w=600&auto=format&fit=crop'
-            ]
-        },
-        {
-            id: '4',
-            name: 'Polki Choker',
-            category: 'necklaces',
-            weight: 25,
-            material: 'gold',
-            size: 'Adjustable',
-            images: [
-                'https://images.unsplash.com/photo-1599643478518-17488fbbcd75?q=80&w=600&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1599643478518-17488fbbcd75?q=80&w=600&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1599643478518-17488fbbcd75?q=80&w=600&auto=format&fit=crop'
-            ]
-        },
-        {
-            id: '5',
-            name: 'Ruby Gold Haram',
-            category: 'necklaces',
-            weight: 45,
-            material: 'gold',
-            size: '24 inches',
-            images: [
-                'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=600&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=600&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=600&auto=format&fit=crop'
-            ]
-        },
-        {
-            id: '6',
-            name: 'Solitaire Diamond Ring',
-            category: 'rings',
-            weight: 5,
-            material: 'platinum',
-            size: 'US 6',
-            images: [
-                'https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?q=80&w=600&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?q=80&w=600&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?q=80&w=600&auto=format&fit=crop'
-            ]
-        },
-        {
-            id: '7',
-            name: 'Antique Gold Band',
-            category: 'rings',
-            weight: 6,
-            material: 'gold',
-            size: 'US 8',
-            images: [
-                'https://images.unsplash.com/photo-1598560976772-096209337f55?q=80&w=600&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1598560976772-096209337f55?q=80&w=600&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1598560976772-096209337f55?q=80&w=600&auto=format&fit=crop'
-            ]
-        },
-        {
-            id: '8',
-            name: 'Chandbali Earrings',
-            category: 'earrings',
-            weight: 10,
-            material: 'gold',
-            size: 'Standard',
-            images: [
-                'https://images.unsplash.com/photo-1630019852942-f89202989a51?q=80&w=600&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1630019852942-f89202989a51?q=80&w=600&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1630019852942-f89202989a51?q=80&w=600&auto=format&fit=crop'
-            ]
-        },
-        {
-            id: '9',
-            name: 'Diamond Studs',
-            category: 'earrings',
-            weight: 4,
-            material: 'platinum',
-            size: 'Standard',
-            images: [
-                'https://images.unsplash.com/photo-1617038220319-276d3cfab638?q=80&w=600&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1617038220319-276d3cfab638?q=80&w=600&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1617038220319-276d3cfab638?q=80&w=600&auto=format&fit=crop'
-            ]
-        },
-        {
-            id: '10',
-            name: 'Diamond Tennis Bracelet',
-            category: 'bracelets',
-            weight: 15,
-            material: 'platinum',
-            size: '7 inches',
-            images: [
-                'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=600&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=600&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=600&auto=format&fit=crop'
-            ]
-        },
-        {
-            id: '11',
-            name: 'Maharani Polki Set',
-            category: 'sets',
-            weight: 80,
-            material: 'gold',
-            size: 'Adjustable',
-            images: [
-                'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=600&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=600&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=600&auto=format&fit=crop'
-            ]
-        },
-        {
-            id: '302',
-            name: 'Silver Payal (Anklets)',
-            category: 'bracelets',
-            weight: 50,
-            material: 'silver',
-            size: '10 inches',
-            images: [
-                'https://images.unsplash.com/photo-1606760316443-a050c39c433b?q=80&w=600&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1606760316443-a050c39c433b?q=80&w=600&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1606760316443-a050c39c433b?q=80&w=600&auto=format&fit=crop'
-            ]
-        },
-        {
-            id: 'neck-new-1',
-            name: 'Royal Jadau Set',
-            category: 'necklaces',
-            weight: 90,
-            material: 'gold',
-            size: 'Adjustable',
-            images: [
-                'https://images.unsplash.com/photo-1602173574767-37ac01994b2a?q=80&w=600&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1602173574767-37ac01994b2a?q=80&w=600&auto=format&fit=crop'
-            ]
-        },
-        {
-            id: 'neck-new-2',
-            name: 'Modern Layered Chain',
-            category: 'necklaces',
-            weight: 15,
-            material: 'gold',
-            size: '18 inches',
-            images: [
-                'https://images.unsplash.com/photo-1599643478518-17488fbbcd75?q=80&w=600&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1599643478518-17488fbbcd75?q=80&w=600&auto=format&fit=crop'
-            ]
-        },
-        {
-            id: 'neck-new-3',
-            name: 'Pearl & Ruby Choker',
-            category: 'necklaces',
-            weight: 35,
-            material: 'gold',
-            size: '14 inches',
-            images: [
-                'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=600&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?q=80&w=600&auto=format&fit=crop'
-            ]
-        },
-        {
-            id: 'neck-new-4',
-            name: 'Traditional Mango Mala',
-            category: 'necklaces',
-            weight: 60,
-            material: 'gold',
-            size: '26 inches',
-            images: [
-                'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=600&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?q=80&w=600&auto=format&fit=crop'
-            ]
-        },
-        {
-            id: 'neck-new-5',
-            name: 'Diamond Pendant Chain',
-            category: 'necklaces',
-            weight: 6,
-            material: 'platinum',
-            size: '16 inches',
-            images: [
-                'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=600&auto=format&fit=crop',
-                'https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?q=80&w=600&auto=format&fit=crop'
-            ]
-        },
-        // --- KADA COLLECTION (Kada King) ---
-        {
-            id: 'kada1',
-            name: 'Royal Maharaja Kada',
-            category: 'kada',
-            weight: 45,
-            material: 'gold',
-            size: '2.6',
-            images: ['assets/images/Kada1-1.jpeg', 'assets/images/Kada1-2.jpeg']
-        },
-        {
-            id: 'kada2',
-            name: 'Antique Kundan Kada',
-            category: 'kada',
-            weight: 50,
-            material: 'gold',
-            size: '2.4',
-            images: ['assets/images/kada2-1.jpeg', 'assets/images/kada2-2.jpeg']
-        },
-        {
-            id: 'kada3',
-            name: 'Temple Carved Kada',
-            category: 'kada',
-            weight: 42,
-            material: 'gold',
-            size: '2.6',
-            images: ['assets/images/kada3.jpeg', 'assets/images/kada3-2.jpeg']
-        },
-        {
-            id: 'kada4',
-            name: 'Rose Gold Diamond Kada',
-            category: 'kada',
-            weight: 35,
-            material: 'gold',
-            size: '2.4',
-            images: ['assets/images/kada4.jpeg', 'assets/images/kada4-1.jpeg', 'assets/images/kada4-2.jpeg']
-        },
-        {
-            id: 'kada5',
-            name: 'Jaipur Meenakari Kada',
-            category: 'kada',
-            weight: 48,
-            material: 'gold',
-            size: '2.8',
-            images: ['assets/images/kada5.jpeg', 'assets/images/kada5-2.jpeg']
-        },
-        {
-            id: 'kada6',
-            name: 'Heavy Solid Gold Kada',
-            category: 'kada',
-            weight: 60,
-            material: 'gold',
-            size: '2.6',
-            images: ['assets/images/kada6.jpeg', 'assets/images/kada6-1.jpeg', 'assets/images/kada6-2.jpeg']
-        },
-        {
-            id: 'kada7',
-            name: 'Peacock Design Kada',
-            category: 'kada',
-            weight: 55,
-            material: 'gold',
-            size: '2.4',
-            images: ['assets/images/kada7.jpeg']
-        },
-        {
-            id: 'kada8',
-            name: 'Ruby Studded Kada',
-            category: 'kada',
-            weight: 40,
-            material: 'gold',
-            size: '2.6',
-            images: ['assets/images/kada8.jpeg', 'assets/images/kada8-1.jpeg', 'assets/images/kada8-2.jpeg']
-        },
-        {
-            id: 'kada9',
-            name: 'Emerald Polki Kada',
-            category: 'kada',
-            weight: 44,
-            material: 'gold',
-            size: '2.4',
-            images: ['assets/images/kada9.jpeg', 'assets/images/kada9-1.jpeg', 'assets/images/kada9-2.jpeg']
-        },
-        {
-            id: 'kada10',
-            name: 'Designer Mesh Kada',
-            category: 'kada',
-            weight: 38,
-            material: 'gold',
-            size: '2.6',
-            images: ['assets/images/kada10.jpeg', 'assets/images/kada10-1.jpeg', 'assets/images/kada10-2.jpeg']
-        },
-        {
-            id: 'kada11',
-            name: 'Vintage Filigree Kada',
-            category: 'kada',
-            weight: 46,
-            material: 'gold',
-            size: '2.4',
-            images: ['assets/images/kada11.jpeg', 'assets/images/kada11-1.jpeg', 'assets/images/kada11-2.jpeg']
-        },
-        {
-            id: 'kada12',
-            name: 'Modern Geometric Kada',
-            category: 'kada',
-            weight: 52,
-            material: 'gold',
-            size: '2.8',
-            images: ['assets/images/kada12.jpeg', 'assets/images/kada12-1.jpeg', 'assets/images/kada12-2.jpeg']
-        },
-        {
-            id: 'kada13',
-            name: 'Classic Smooth Kada',
-            category: 'kada',
-            weight: 58,
-            material: 'gold',
-            size: '2.6',
-            images: ['assets/images/kada13.jpeg', 'assets/images/kada13-1.jpeg', 'assets/images/kada13-2.jpeg']
-        },
-        {
-            id: 'kada14',
-            name: 'Bridal Heavy Kada',
-            category: 'kada',
-            weight: 75,
-            material: 'gold',
-            size: '2.4',
-            images: ['assets/images/kada14.jpeg', 'assets/images/kada14-1.jpeg', 'assets/images/kada14-2.jpeg']
-        },
-        // --- NEW RINGS COLLECTION ---
-        {
-            id: 'ring-new-1',
-            name: 'Royal Polki Ring',
-            category: 'rings',
-            weight: 12,
-            material: 'gold',
-            size: 'US 7',
-            images: [
-                'assets/images/ring/ring1 (1).JPG',
-                'assets/images/ring/ring1 (2).JPG',
-                'assets/images/ring/ring1 (3).JPG',
-                'assets/images/ring/ring1 (4).JPG',
-                'assets/images/ring/ring1 (5).JPG',
-                'assets/images/ring/ring1 (6).JPG',
-                'assets/images/ring/ring1 (7).JPG',
-                'assets/images/ring/ring1 (8).JPG'
-            ]
-        },
-        {
-            id: 'ring-new-2',
-            name: 'Ruby Statement Ring',
-            category: 'rings',
-            weight: 15,
-            material: 'gold',
-            size: 'US 8',
-            images: [
-                'assets/images/ring/ring2 (1).JPG',
-                'assets/images/ring/ring2 (2).JPG',
-                'assets/images/ring/ring2.JPG'
-            ]
-        },
-        {
-            id: 'ring-new-3',
-            name: 'Classic Gold Band',
-            category: 'rings',
-            weight: 8,
-            material: 'gold',
-            size: 'US 9',
-            images: [
-                'assets/images/ring/ring3 (1).JPG',
-                'assets/images/ring/ring3 (2).JPG',
-                'assets/images/ring/ring3 (3).JPG',
-                'assets/images/ring/ring3 (4).JPG',
-                'assets/images/ring/ring3 (5).JPG',
-                'assets/images/ring/ring3 (6).JPG',
-                'assets/images/ring/ring3 (7).JPG',
-                'assets/images/ring/ring3 (8).JPG',
-                'assets/images/ring/ring3 (9).JPG',
-                'assets/images/ring/ring3 (10).JPG'
-            ]
-        },
-        {
-            id: 'ring-new-4',
-            name: 'Diamond Halo Ring',
-            category: 'rings',
-            weight: 6,
-            material: 'platinum',
-            size: 'US 6',
-            images: [
-                'assets/images/ring/ring4 (1).JPG',
-                'assets/images/ring/ring4 (2).JPG',
-                'assets/images/ring/ring4 (3).JPG',
-                'assets/images/ring/ring4 (4).JPG',
-                'assets/images/ring/ring4 (5).JPG',
-                'assets/images/ring/ring4 (6).JPG',
-                'assets/images/ring/ring4 (7).JPG',
-                'assets/images/ring/ring4 (8).JPG',
-                'assets/images/ring/ring4 (9).JPG',
-                'assets/images/ring/ring4 (10).JPG',
-                'assets/images/ring/ring4 (11).JPG'
-            ]
-        },
-        {
-            id: 'ring-new-5',
-            name: 'Vintage Kundan Ring',
-            category: 'rings',
-            weight: 18,
-            material: 'gold',
-            size: 'Adjustable',
-            images: [
-                'assets/images/ring/ring5 (1).JPG',
-                'assets/images/ring/ring5 (2).JPG',
-                'assets/images/ring/ring5 (3).JPG',
-                'assets/images/ring/ring5 (4).JPG',
-                'assets/images/ring/ring5 (5).JPG',
-                'assets/images/ring/ring5 (6).JPG',
-                'assets/images/ring/ring5 (7).JPG'
-            ]
-        },
-        {
-            id: 'ring-new-6',
-            name: 'Sapphire Gold Ring',
-            category: 'rings',
-            weight: 10,
-            material: 'gold',
-            size: 'US 7',
-            images: [
-                'assets/images/ring/ring6 (1).JPG',
-                'assets/images/ring/ring6 (2).JPG',
-                'assets/images/ring/ring6 (3).JPG',
-                'assets/images/ring/ring6 (4).JPG',
-                'assets/images/ring/ring6 (5).JPG',
-                'assets/images/ring/ring6 (6).JPG',
-                'assets/images/ring/ring6 (7).JPG',
-                'assets/images/ring/ring6 (8).JPG',
-                'assets/images/ring/ring6 (9).JPG'
-            ]
-        },
-        {
-            id: 'ring-new-7',
-            name: 'Antique Temple Ring',
-            category: 'rings',
-            weight: 14,
-            material: 'gold',
-            size: 'Adjustable',
-            images: [
-                'assets/images/ring/ring7 (1).JPG',
-                'assets/images/ring/ring7 (2).JPG',
-                'assets/images/ring/ring7 (3).JPG',
-                'assets/images/ring/ring7 (4).JPG',
-                'assets/images/ring/ring7 (5).JPG',
-                'assets/images/ring/ring7 (6).JPG',
-                'assets/images/ring/ring7 (7).JPG'
-            ]
-        },
-        {
-            id: 'ring-new-8',
-            name: 'Floral Diamond Ring',
-            category: 'rings',
-            weight: 6,
-            material: 'gold',
-            size: 'US 7',
-            images: [
-                'assets/images/ring/ring8 (1).JPG',
-                'assets/images/ring/ring8 (2).JPG',
-                'assets/images/ring/ring8 (3).JPG',
-                'assets/images/ring/ring8 (4).JPG',
-                'assets/images/ring/ring8 (5).JPG',
-                'assets/images/ring/ring8 (6).JPG',
-                'assets/images/ring/ring8 (7).JPG',
-                'assets/images/ring/ring8 (8).JPG',
-                'assets/images/ring/ring8 (9).JPG',
-                'assets/images/ring/ring8 (10).JPG'
-            ]
-        },
-        {
-            id: 'ring-new-9',
-            name: 'Peacock Statement Ring',
-            category: 'rings',
-            weight: 18,
-            material: 'gold',
-            size: 'Adjustable',
-            images: [
-                'assets/images/ring/ring9 (1).JPG',
-                'assets/images/ring/ring9 (2).JPG',
-                'assets/images/ring/ring9 (3).JPG',
-                'assets/images/ring/ring9 (4).JPG',
-                'assets/images/ring/ring9 (5).JPG',
-                'assets/images/ring/ring9 (6).JPG',
-                'assets/images/ring/ring9 (7).JPG'
-            ]
-        },
-        {
-            id: 'ring-new-10',
-            name: 'Classic Solitaire',
-            category: 'rings',
-            weight: 4,
-            material: 'platinum',
-            size: 'US 6',
-            images: [
-                'assets/images/ring/ring10 (1).JPG',
-                'assets/images/ring/ring10 (2).JPG',
-                'assets/images/ring/ring10 (3).JPG',
-                'assets/images/ring/ring10 (4).JPG',
-                'assets/images/ring/ring10 (5).JPG',
-                'assets/images/ring/ring10 (6).JPG',
-                'assets/images/ring/ring10 (7).JPG',
-                'assets/images/ring/ring10 (8).JPG',
-                'assets/images/ring/ring10 (9).JPG',
-                'assets/images/ring/ring10 (10).JPG'
-            ]
-        },
-        {
-            id: 'ring-new-11',
-            name: 'Ruby Cluster Ring',
-            category: 'rings',
-            weight: 9,
-            material: 'gold',
-            size: 'US 8',
-            images: [
-                'assets/images/ring/ring11 (1).JPG',
-                'assets/images/ring/ring11 (2).JPG',
-                'assets/images/ring/ring11 (3).JPG',
-                'assets/images/ring/ring11 (4).JPG',
-                'assets/images/ring/ring11 (5).JPG',
-                'assets/images/ring/ring11 (6).JPG',
-                'assets/images/ring/ring11 (7).JPG'
-            ]
-        },
-        {
-            id: 'ring-new-12',
-            name: 'Traditional Gold Band',
-            category: 'rings',
-            weight: 8,
-            material: 'gold',
-            size: 'US 9',
-            images: [
-                'assets/images/ring/ring12 (1).JPG',
-                'assets/images/ring/ring12 (2).JPG',
-                'assets/images/ring/ring12 (3).JPG',
-                'assets/images/ring/ring12 (4).JPG',
-                'assets/images/ring/ring12 (5).JPG',
-                'assets/images/ring/ring12 (6).JPG',
-                'assets/images/ring/ring12 (7).JPG'
-            ]
-        },
-        {
-            id: 'ring-new-13',
-            name: 'Modern Mesh Ring',
-            category: 'rings',
-            weight: 7,
-            material: 'gold',
-            size: 'US 7',
-            images: [
-                'assets/images/ring/ring13 (1).JPG',
-                'assets/images/ring/ring13 (2).JPG',
-                'assets/images/ring/ring13 (3).JPG',
-                'assets/images/ring/ring13 (4).JPG',
-                'assets/images/ring/ring13 (5).JPG',
-                'assets/images/ring/ring13 (6).JPG',
-                'assets/images/ring/ring13 (7).JPG',
-                'assets/images/ring/ring13 (8).JPG'
-            ]
-        },
-        {
-            id: 'ring-new-14',
-            name: 'Bridal Polki Ring',
-            category: 'rings',
-            weight: 15,
-            material: 'gold',
-            size: 'Adjustable',
-            images: [
-                'assets/images/ring/ring14 (1).JPG',
-                'assets/images/ring/ring14 (2).JPG',
-                'assets/images/ring/ring14 (3).JPG',
-                'assets/images/ring/ring14 (4).JPG',
-                'assets/images/ring/ring14 (5).JPG',
-                'assets/images/ring/ring14 (6).JPG'
-            ]
-        },
-        {
-            id: 'ring-new-15',
-            name: 'Rose Gold Diamond',
-            category: 'rings',
-            weight: 5,
-            material: 'gold',
-            size: 'US 6',
-            images: [
-                'assets/images/ring/ring15 (1).JPG',
-                'assets/images/ring/ring15 (2).JPG',
-                'assets/images/ring/ring15 (3).JPG',
-                'assets/images/ring/ring15 (4).JPG',
-                'assets/images/ring/ring15 (5).JPG',
-                'assets/images/ring/ring15 (6).JPG',
-                'assets/images/ring/ring15 (7).JPG'
-            ]
-        },
-        {
-            id: 'ring-new-16',
-            name: 'Emerald Gold Ring',
-            category: 'rings',
-            weight: 10,
-            material: 'gold',
-            size: 'US 8',
-            images: [
-                'assets/images/ring/ring16 (1).JPG',
-                'assets/images/ring/ring16 (2).JPG',
-                'assets/images/ring/ring16 (3).JPG',
-                'assets/images/ring/ring16 (4).JPG',
-                'assets/images/ring/ring16 (5).JPG',
-                'assets/images/ring/ring16 (6).JPG',
-                'assets/images/ring/ring16 (7).JPG'
-            ]
-        },
-        {
-            id: 'ring-new-17',
-            name: 'Vintage Coin Ring',
-            category: 'rings',
-            weight: 12,
-            material: 'gold',
-            size: 'US 9',
-            images: [
-                'assets/images/ring/ring17 (1).JPG',
-                'assets/images/ring/ring17 (2).JPG',
-                'assets/images/ring/ring17 (3).JPG',
-                'assets/images/ring/ring17 (4).JPG',
-                'assets/images/ring/ring17 (5).JPG',
-                'assets/images/ring/ring17 (6).JPG',
-                'assets/images/ring/ring17 (7).JPG',
-                'assets/images/ring/ring17 (8).JPG',
-                'assets/images/ring/ring17 (9).JPG',
-                'assets/images/ring/ring17 (10).JPG',
-                'assets/images/ring/ring17 (11).JPG'
-            ]
-        },
-        {
-            id: 'ring-new-18',
-            name: 'Sapphire Halo Ring',
-            category: 'rings',
-            weight: 6,
-            material: 'platinum',
-            size: 'US 7',
-            images: [
-                'assets/images/ring/ring18 (1).JPG',
-                'assets/images/ring/ring18 (2).JPG',
-                'assets/images/ring/ring18 (3).JPG',
-                'assets/images/ring/ring18 (4).JPG',
-                'assets/images/ring/ring18 (5).JPG',
-                'assets/images/ring/ring18 (6).JPG',
-                'assets/images/ring/ring18 (7).JPG',
-                'assets/images/ring/ring18 (8).JPG'
-            ]
-        },
-        {
-            id: 'ring-new-19',
-            name: 'Kundan Flower Ring',
-            category: 'rings',
-            weight: 16,
-            material: 'gold',
-            size: 'Adjustable',
-            images: [
-                'assets/images/ring/ring19 (1).JPG',
-                'assets/images/ring/ring19 (2).JPG',
-                'assets/images/ring/ring19 (3).JPG',
-                'assets/images/ring/ring19 (4).JPG',
-                'assets/images/ring/ring19 (5).JPG',
-                'assets/images/ring/ring19 (6).JPG',
-                'assets/images/ring/ring19 (7).JPG'
-            ]
-        },
-        {
-            id: 'ring-new-20',
-            name: 'Royal Signet Ring',
-            category: 'rings',
-            weight: 20,
-            material: 'gold',
-            size: 'US 10',
-            images: [
-                'assets/images/ring/ring20 (1).JPG',
-                'assets/images/ring/ring20 (2).JPG',
-                'assets/images/ring/ring20 (3).JPG',
-                'assets/images/ring/ring20 (4).JPG',
-                'assets/images/ring/ring20 (5).JPG',
-                'assets/images/ring/ring20 (6).JPG',
-                'assets/images/ring/ring20 (7).JPG',
-                'assets/images/ring/ring20 (8).JPG',
-                'assets/images/ring/ring20 (9).JPG',
-                'assets/images/ring/ring20 (10).JPG',
-                'assets/images/ring/ring20 (11).JPG'
-            ]
-        }
-    ];
-
-    // --- DYNAMICALLY ADD RINGS 21-57 ---
-    // This automatically adds the remaining rings based on your file list
-    const ringCounts = {
-        21: 10, 22: 8, 23: 9, 24: 8, 25: 8, 26: 9, 27: 8, 28: 8, 29: 11, 30: 10,
-        31: 11, 32: 8, 33: 7, 34: 8, 35: 7, 36: 3, 37: 5, 38: 9, 39: 7, 40: 8,
-        41: 8, 42: 7, 43: 10, 44: 8, 45: 7, 46: 8, 47: 9, 49: 11, 50: 7,
-        51: 9, 52: 6, 53: 10, 54: 9, 55: 8, 56: 12, 57: 17
-    };
-
-    const ringAdjectives = [
-        "Imperial", "Majestic", "Regal", "Vintage", "Classic", "Modern", "Ethereal", "Timeless", "Grand", "Opulent",
-        "Heritage", "Divine", "Radiant", "Elegant", "Sophisticated", "Charming", "Graceful", "Exquisite", "Luxurious", "Precious"
-    ];
-
-    for (let i = 21; i <= 57; i++) {
-        if (i === 48) continue; // Missing in files
-        
-        const count = ringCounts[i] || 5;
-        const images = [];
-        for (let j = 1; j <= count; j++) {
-            images.push(`assets/images/ring/ring${i} (${j}).JPG`);
-        }
-
-        const nameIndex = (i - 21) % ringAdjectives.length;
-        const nameSuffix = i % 2 === 0 ? "Band" : "Ring";
-        
-        productsDatabase.push({
-            id: `ring-new-${i}`,
-            name: `${ringAdjectives[nameIndex]} Gold ${nameSuffix}`,
-            category: 'rings',
-            weight: Math.floor(Math.random() * (12 - 4 + 1)) + 4, // Random weight 4-12g
-            material: 'gold',
-            size: i % 3 === 0 ? 'Adjustable' : `US ${Math.floor(Math.random() * (9 - 6 + 1)) + 6}`,
-            images: images
-        });
-    }
+    // --- 0.5. PRODUCT DATABASE (FETCH FROM JSON) ---
+    let productsDatabase = [];
 
     // --- CMS: LOAD FROM STORAGE IF AVAILABLE ---
-    const storedProducts = localStorage.getItem('rajshreeProducts');
-    if (storedProducts) {
-        productsDatabase = JSON.parse(storedProducts);
-    } else {
-        // Initial save of default data
-        localStorage.setItem('rajshreeProducts', JSON.stringify(productsDatabase));
+    try {
+        const storedProducts = localStorage.getItem('rajshreeProducts');
+        if (storedProducts) {
+            productsDatabase = JSON.parse(storedProducts);
+            window.rajshreeProducts = productsDatabase;
+        } else {
+            // Fetch from JSON file
+            fetch('assets/data/products.json')
+                .then(response => response.json())
+                .then(data => {
+                    productsDatabase = data;
+                    window.rajshreeProducts = productsDatabase;
+                    // Apply Google Drive fix
+                    productsDatabase.forEach(p => {
+                        if(p.images && Array.isArray(p.images)) {
+                            p.images = p.images.map(img => convertGoogleDriveLink(img));
+                        }
+                    });
+                    // Save to local storage for persistence during session
+                    localStorage.setItem('rajshreeProducts', JSON.stringify(productsDatabase));
+                    
+                    // Re-run any logic that depends on products
+                    if (window.location.pathname.includes('collection.html')) {
+                        window.currentFilteredProducts = productsDatabase;
+                        applyFilters();
+                    }
+                    if (window.location.pathname.includes('product-detail.html')) {
+                        loadProductDetailPage(productsDatabase);
+                    }
+                    if (window.location.pathname.includes('admin-dashboard.html')) {
+                        if(typeof renderTable === 'function') renderTable();
+                    }
+                })
+                .catch(err => console.error('Error loading products:', err));
+        }
+    } catch (e) {
+        console.error("Error loading products from storage:", e);
     }
+
+    // --- FIX: GOOGLE DRIVE IMAGE LINKS ---
+    const convertGoogleDriveLink = (url) => {
+        if (!url) return url;
+        if (typeof url === 'string' && url.includes('drive.google.com')) {
+            let idMatch = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+            if (idMatch && idMatch[1]) return `https://drive.google.com/uc?export=view&id=${idMatch[1]}`;
+            idMatch = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+            if (idMatch && idMatch[1]) return `https://drive.google.com/uc?export=view&id=${idMatch[1]}`;
+        }
+        return url;
+    };
 
     // Expose to window if needed for other scripts, or just use locally
     window.rajshreeProducts = productsDatabase;
@@ -809,6 +108,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if(!localStorage.getItem('rajshreeAdmin')) window.location.href = 'login.html';
         },
         saveProduct: (product) => {
+            // Convert Drive Links before saving
+            if(product.images && Array.isArray(product.images)) {
+                product.images = product.images.map(img => convertGoogleDriveLink(img));
+            }
             let products = window.rajshreeProducts;
             const idx = products.findIndex(p => p.id === product.id);
             if(idx >= 0) products[idx] = product;
@@ -2190,12 +1493,13 @@ function initCustomCursor() {
         window.addEventListener('mousemove', (e) => {
             mouseX = e.clientX;
             mouseY = e.clientY;
-            // Dot follows instantly
-            dot.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
         });
 
         // Optimized: Use requestAnimationFrame for smooth outline follow
         const animateOutline = () => {
+            // Dot follows cursor (synced to frame rate for performance)
+            dot.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
+            
             outlineX += (mouseX - outlineX) * 0.15;
             outlineY += (mouseY - outlineY) * 0.15;
             outline.style.transform = `translate(${outlineX}px, ${outlineY}px) translate(-50%, -50%)`;
